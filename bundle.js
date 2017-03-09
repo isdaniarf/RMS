@@ -12739,6 +12739,8 @@ var _colors = __webpack_require__(64);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var ContactList = function ContactList() {
   return _react2.default.createElement(
     'div',
@@ -12747,31 +12749,31 @@ var ContactList = function ContactList() {
       _List.List,
       null,
       _react2.default.createElement(_List.ListItem, {
-        primaryText: 'Chelsea Otakan',
+        primaryText: 'James Anderson',
         leftIcon: _react2.default.createElement(_grade2.default, { color: _colors.pinkA200 }),
-        rightAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/dani_150.jpg' })
+        leftAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/dani_150.jpg' })
       }),
       _react2.default.createElement(_List.ListItem, {
         primaryText: 'Eric Hoffman',
         insetChildren: true,
-        rightAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/bayu_150.jpg' })
+        leftAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/bayu_150.jpg' })
       }),
       _react2.default.createElement(_List.ListItem, {
-        primaryText: 'James Anderson',
+        primaryText: 'Chelsea Otakan',
         insetChildren: true,
-        rightAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/tiara_150.jpg' })
+        leftAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/tiara_150.jpg' })
       }),
       _react2.default.createElement(_List.ListItem, {
         primaryText: 'Kerem Suer',
         insetChildren: true,
-        rightAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/wahyu_150.jpg' })
+        leftAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/wahyu_150.jpg' })
       })
     ),
     _react2.default.createElement(_Divider2.default, { inset: true }),
     _react2.default.createElement(
       _List.List,
       null,
-      _react2.default.createElement(_List.ListItem, {
+      _react2.default.createElement(_List.ListItem, _defineProperty({
         primaryText: 'Adelle Charles',
         leftAvatar: _react2.default.createElement(
           _Avatar2.default,
@@ -12780,23 +12782,22 @@ var ContactList = function ContactList() {
             style: { left: 8 }
           },
           'A'
-        ),
-        rightAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/diyon_150.jpg' })
-      }),
+        )
+      }, 'leftAvatar', _react2.default.createElement(_Avatar2.default, { src: 'images/diyon_150.jpg' }))),
       _react2.default.createElement(_List.ListItem, {
         primaryText: 'Adham Dannaway',
         insetChildren: true,
-        rightAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/ica_150.jpg' })
+        leftAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/ica_150.jpg' })
       }),
       _react2.default.createElement(_List.ListItem, {
         primaryText: 'Allison Grayce',
         insetChildren: true,
-        rightAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/griya_150.jpg' })
+        leftAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/griya_150.jpg' })
       }),
       _react2.default.createElement(_List.ListItem, {
         primaryText: 'Angel Ceballos',
         insetChildren: true,
-        rightAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/monica_150.jpg' })
+        leftAvatar: _react2.default.createElement(_Avatar2.default, { src: 'images/monica_150.jpg' })
       })
     )
   );
