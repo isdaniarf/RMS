@@ -9,24 +9,24 @@ const ContactList = () => (
   <div>
     <List>
       <ListItem
-        primaryText="Chelsea Otakan"
+        primaryText="James Anderson"
         leftIcon={<ActionGrade color={pinkA200} />}
-        rightAvatar={<Avatar src="images/dani_150.jpg" />}
+        leftAvatar={<Avatar src="images/dani_150.jpg" />}
       />
       <ListItem
         primaryText="Eric Hoffman"
         insetChildren={true}
-        rightAvatar={<Avatar src="images/bayu_150.jpg" />}
+        leftAvatar={<Avatar src="images/bayu_150.jpg" />}
       />
       <ListItem
-        primaryText="James Anderson"
+        primaryText="Chelsea Otakan"
         insetChildren={true}
-        rightAvatar={<Avatar src="images/tiara_150.jpg" />}
+        leftAvatar={<Avatar src="images/tiara_150.jpg" />}
       />
       <ListItem
         primaryText="Kerem Suer"
         insetChildren={true}
-        rightAvatar={<Avatar src="images/wahyu_150.jpg" />}
+        leftAvatar={<Avatar src="images/wahyu_150.jpg" />}
       />
     </List>
     <Divider inset={true} />
@@ -41,22 +41,22 @@ const ContactList = () => (
             A
           </Avatar>
         }
-        rightAvatar={<Avatar src="images/diyon_150.jpg" />}
+        leftAvatar={<Avatar src="images/diyon_150.jpg" />}
       />
       <ListItem
         primaryText="Adham Dannaway"
         insetChildren={true}
-        rightAvatar={<Avatar src="images/ica_150.jpg" />}
+        leftAvatar={<Avatar src="images/ica_150.jpg" />}
       />
       <ListItem
         primaryText="Allison Grayce"
         insetChildren={true}
-        rightAvatar={<Avatar src="images/griya_150.jpg" />}
+        leftAvatar={<Avatar src="images/griya_150.jpg" />}
       />
       <ListItem
         primaryText="Angel Ceballos"
         insetChildren={true}
-        rightAvatar={<Avatar src="images/monica_150.jpg" />}
+        leftAvatar={<Avatar src="images/monica_150.jpg" />}
       />
     </List>
   </div>
