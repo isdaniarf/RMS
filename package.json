@@ -4,7 +4,7 @@
   "description": "Resource Management System",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --watch-poll"
+    "start": "webpack-dev-server --watch"
   },
   "author": "Isdaniar Fithrantyo",
   "license": "ISC",
