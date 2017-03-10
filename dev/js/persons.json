@@ -1,0 +1,58 @@
+[
+    {
+        "name": "James Anderson",
+        "grade": "SE-PG",
+        "city": "Yogyakarta",
+        "mobileNo": "+6281219518694",
+        "avatar": "images/dani_150.jpg"
+    },
+    {
+        "name": "Eric Hoffman",
+        "grade": "MJF-PM",
+        "city": "Bandung",
+        "mobileNo": "+6281219518694",
+        "avatar": "images/bayu_150.jpg"
+    },
+    {
+        "name": "Chelsea Otakan",
+        "grade": "CON-CON",
+        "city": "Bandung",
+        "mobileNo": "+6281219518694",
+        "avatar": "images/tiara_150.jpg"
+    },
+    {
+        "name": "Kerem Suer",
+        "grade": "SE-PG",
+        "city": "Yogyakarta",
+        "mobileNo": "+6281219518694",
+        "avatar": "images/wahyu_150.jpg"
+    },
+    {
+        "name": "Adam Chandler",
+        "grade": "SE-AN",
+        "city": "Yogyakarta",
+        "mobileNo": "+6281219518694",
+        "avatar": "images/diyon_150.jpg"
+    },
+    {
+        "name": "Alice Mayer",
+        "grade": "ADM-ADM1",
+        "city": "Bali",
+        "mobileNo": "+6281219518694",
+        "avatar": "images/ica_150.jpg"
+    },
+    {
+        "name": "Allison Grayce",
+        "grade": "ADM-ADM2",
+        "city": "Bali",
+        "mobileNo": "+6281219518694",
+        "avatar": "images/griya_150.jpg"
+    },
+    {
+        "name": "Angel Ceballos",
+        "grade": "ADM-ADM2",
+        "city": "Bali",
+        "mobileNo": "+6281219518694",
+        "avatar": "images/monica_150.jpg"
+    }
+]

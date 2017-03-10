@@ -9,15 +9,16 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 // require('./style.css')
+var contacts = require('./persons.json');
 
 const MyButton = () => (
     <RaisedButton label="Default" />
 );
 
-const MyBar = () => (
+const TopBar = () => (
     <AppBar
-        title="Title"
-        iconClassNameRight="muidocs-icon-navigation-expand-more"
+        title = 'Title'
+        iconClassNameRight = 'muidocs-icon-navigation-expand-more'
     />
 );
 
@@ -26,7 +27,7 @@ class WrapperComponent extends React.Component {
         return (
             <MuiThemeProvider>
                 <div>
-                    <MyBar />
+                    <TopBar />
                     <ContactList />
                     <MyButton />
                 </div>

@@ -5,11 +5,21 @@ import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
 import {pinkA200, transparent} from 'material-ui/styles/colors';
 
+const EXPAND_CONTACT = 'EXPAND_CONTACT';
+
+function expandContact() {
+  return {
+    type: EXPAND_CONTACT,
+    text
+  }
+}
+
 const ContactList = () => (
   <div>
     <List>
       <ListItem
         primaryText="James Anderson"
+        secondaryText="SE-PG"
         leftIcon={<ActionGrade color={pinkA200} />}
         leftAvatar={<Avatar src="images/dani_150.jpg" />}
       />
