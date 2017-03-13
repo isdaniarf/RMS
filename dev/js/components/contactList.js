@@ -18,6 +18,7 @@ const ContactList = ({contacts}) => (
   <div>
     <List>
       {contacts.map((contact) => (
+        <div>
         <ListItem
           key = {contact.name}
           primaryText={contact.name}
@@ -25,6 +26,8 @@ const ContactList = ({contacts}) => (
           leftIcon={<ActionGrade color={pinkA200} />}
           leftAvatar={<Avatar src={contact.avatar} />}
         />
+        <Divider />
+        </div>
       ))}
     </List>
     <Divider inset={true} />

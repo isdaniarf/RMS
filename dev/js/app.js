@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import ContactList from './components/contactList';
 import ProfileHeader from './components/profileHeader';
+import RightSection from './components/rightSection';
 import { createStore } from 'redux';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -20,15 +21,21 @@ const MyButton = () => (
 
 const TopBar = () => (
     <AppBar
-        title='James Anderson'
+        title={<ProfileHeader />}
         iconClassNameRight='muidocs-icon-navigation-expand-more'
     >
-
+        
     </AppBar>
 );
 
-const divStyle = {
-  width:'20%'
+const leftSection = {
+    width:'20%',
+    float:'left'
+};
+
+const rightSection = {
+    float:'right',
+    width:'80%'
 };
 
 class WrapperComponent extends React.Component {
@@ -40,8 +47,11 @@ class WrapperComponent extends React.Component {
                     <div>
                         <TopBar />
                     </div>
-                    <div style = {divStyle}>
+                    <div style = {leftSection}>
                         <ContactList contacts={contacts} />
+                    </div>
+                    <div style = {rightSection}>
+                        <RightSection />
                     </div>
                 </div>
             </MuiThemeProvider>

@@ -1,58 +1,156 @@
 [
     {
-        "name": "James Anderson",
-        "grade": "SE-PG",
-        "city": "Yogyakarta",
-        "mobileNo": "+6281219518694",
-        "avatar": "images/dani_150.jpg"
-    },
-    {
+        "id": "01200",
         "name": "Eric Hoffman",
         "grade": "MJF-PM",
         "city": "Bandung",
         "mobileNo": "+6281219518694",
-        "avatar": "images/bayu_150.jpg"
+        "avatar": "images/bayu_150.jpg",
+        "detail": {
+            "firstName": "Eric",
+            "lastName": "Hoffman",
+            "division": "CDC",
+            "subDivision": "Java Bootcamp",
+            "dob": "01-05-1980",
+            "doj": "02-06-2009",
+            "nationality": "Indonesian",
+            "email": "eric.hoffman@gmail.com",
+            "maritalStatus": "Married",
+            "employmentStatus": "Permanent",
+            "gender": "Male",
+            "suspendDate": ""
+        }
     },
     {
+        "id": "01201",
         "name": "Chelsea Otakan",
         "grade": "CON-CON",
         "city": "Bandung",
         "mobileNo": "+6281219518694",
-        "avatar": "images/tiara_150.jpg"
+        "avatar": "images/tiara_150.jpg",
+        "detail": {
+            "firstName": "Chelsea",
+            "lastName": "Otakan",
+            "division": "MMS",
+            "subDivision": "MMS BO",
+            "dob": "01-05-1991",
+            "doj": "02-06-2014",
+            "nationality": "Indonesian",
+            "email": "chelsea.otakan@gmail.com",
+            "maritalStatus": "Single",
+            "employmentStatus": "Permanent",
+            "gender": "Female",
+            "suspendDate": ""
+        }
     },
     {
+        "id": "01202",
         "name": "Kerem Suer",
         "grade": "SE-PG",
         "city": "Yogyakarta",
         "mobileNo": "+6281219518694",
-        "avatar": "images/wahyu_150.jpg"
+        "avatar": "images/wahyu_150.jpg",
+        "detail": {
+            "firstName": "Kerem",
+            "lastName": "Suer",
+            "division": "CDC",
+            "subDivision": "Java Bootcamp",
+            "dob": "01-05-1980",
+            "doj": "02-06-2014",
+            "nationality": "Indonesian",
+            "email": "Kerem.Suer@gmail.com",
+            "maritalStatus": "Single",
+            "employmentStatus": "Permanent",
+            "gender": "Male",
+            "suspendDate": ""
+        }
     },
     {
+        "id": "01203",
         "name": "Adam Chandler",
         "grade": "SE-AN",
         "city": "Yogyakarta",
         "mobileNo": "+6281219518694",
-        "avatar": "images/diyon_150.jpg"
+        "avatar": "images/diyon_150.jpg",
+        "detail": {
+            "firstName": "Adam",
+            "lastName": "Chandler",
+            "division": "CDC",
+            "subDivision": "Java Bootcamp",
+            "dob": "01-05-1982",
+            "doj": "02-06-2014",
+            "nationality": "Indonesian",
+            "email": "Adam.Chandler@gmail.com",
+            "maritalStatus": "Married",
+            "employmentStatus": "Permanent",
+            "gender": "Male",
+            "suspendDate": ""
+        }
     },
     {
-        "name": "Alice Mayer",
+        "id": "01204",
+        "name": "Alice Meyer",
         "grade": "ADM-ADM1",
         "city": "Bali",
         "mobileNo": "+6281219518694",
-        "avatar": "images/ica_150.jpg"
+        "avatar": "images/ica_150.jpg",
+        "detail": {
+            "firstName": "Alice",
+            "lastName": "Meyer",
+            "division": "ADM",
+            "subDivision": "Marketing",
+            "dob": "01-05-1980",
+            "doj": "02-06-2014",
+            "nationality": "Indonesian",
+            "email": "Alice.Meyer@gmail.com",
+            "maritalStatus": "Single",
+            "employmentStatus": "Permanent",
+            "gender": "Female",
+            "suspendDate": ""
+        }
     },
     {
+        "id": "01205",
         "name": "Allison Grayce",
-        "grade": "ADM-ADM2",
+        "grade": "TR-TR3",
         "city": "Bali",
         "mobileNo": "+6281219518694",
-        "avatar": "images/griya_150.jpg"
+        "avatar": "images/griya_150.jpg",
+        "detail": {
+            "firstName": "Allison",
+            "lastName": "Grayce",
+            "division": "TR",
+            "subDivision": "English Trainer",
+            "dob": "01-05-1980",
+            "doj": "02-06-2014",
+            "nationality": "Indonesian",
+            "email": "Allison.Grayce@gmail.com",
+            "maritalStatus": "Single",
+            "employmentStatus": "Permanent",
+            "gender": "Female",
+            "suspendDate": ""
+        }
     },
     {
+        "id": "01206",
         "name": "Angel Ceballos",
-        "grade": "ADM-ADM2",
+        "grade": "SE-PG",
         "city": "Bali",
         "mobileNo": "+6281219518694",
-        "avatar": "images/monica_150.jpg"
+        "avatar": "images/monica_150.jpg",
+        "detail": {
+            "firstName": "Angel",
+            "lastName": "Ceballos",
+            "division": "CDC",
+            "subDivision": "Java Bootcamp",
+            "dob": "01-05-1991",
+            "doj": "02-06-2014",
+            "nationality": "Indonesian",
+            "email": "Angel.Ceballos@gmail.com",
+            "maritalStatus": "Single",
+            "employmentStatus": "Permanent",
+            "gender": "Female",
+            "suspendDate": ""
+        }
     }
 ]

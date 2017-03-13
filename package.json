@@ -4,7 +4,7 @@
   "description": "Resource Management System",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --watch"
+    "start": "webpack-dev-server --inline"
   },
   "author": "Isdaniar Fithrantyo",
   "license": "ISC",

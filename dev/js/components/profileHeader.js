@@ -6,8 +6,9 @@ import Avatar from 'material-ui/Avatar';
 
 const ProfileHeader = () => (
     <ListItem
-        primaryText="James Anderson"
-        secondaryText="SE-PG"
+        disabled={true}
+        primaryText='James Anderson'
+        secondaryText='SE-PG'
         leftIcon={<ActionGrade color={pinkA200} />}
         leftAvatar={<Avatar src="images/dani_150.jpg" />}
       />
