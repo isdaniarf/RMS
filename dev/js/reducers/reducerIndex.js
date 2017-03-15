@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import reducePersons from './reducers/reducePersons'
+import reducePerson from './reducePerson'
+import reduceEmployees from './reduceEmployees'
 
 const rmsApp = combineReducers({
-  reducePersons
+  reducePerson,
+  reduceEmployees
 })
 
 export default rmsApp

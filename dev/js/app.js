@@ -3,17 +3,23 @@ import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
-import ContactList from './components/contactList';
+import EmployeeList from './components/EmployeeList';
 import ProfileHeader from './components/profileHeader';
 import RightSection from './components/rightSection';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import rmsApp from './reducers/reducerIndex'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 // require('./style.css')
-// const store = createStore();
-var contacts = require('./data/persons.json');
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+let store = createStore(rmsApp, composeEnhancers(applyMiddleware(thunk)));
+var employees = require('./data/persons.json');
+
+// console.log(store.getState());
 
 const MyButton = () => (
     <RaisedButton label="Default" />
@@ -21,25 +27,25 @@ const MyButton = () => (
 
 const TopBar = () => (
     <AppBar
-        title={<ProfileHeader />}
+        title={<ProfileHeader func={'header clicked'} />}
         iconClassNameRight='muidocs-icon-navigation-expand-more'
     >
-        
+
     </AppBar>
 );
 
 const leftSection = {
-    width:'20%',
-    float:'left'
+    width: '20%',
+    float: 'left'
 };
 
 const rightSection = {
-    float:'right',
-    width:'80%'
+    float: 'right',
+    width: '80%'
 };
 
 class WrapperComponent extends React.Component {
-    
+
     render() {
         return (
             <MuiThemeProvider>
@@ -47,10 +53,10 @@ class WrapperComponent extends React.Component {
                     <div>
                         <TopBar />
                     </div>
-                    <div style = {leftSection}>
-                        <ContactList contacts={contacts} />
+                    <div style={leftSection}>
+                        <EmployeeList />
                     </div>
-                    <div style = {rightSection}>
+                    <div style={rightSection}>
                         <RightSection />
                     </div>
                 </div>
@@ -59,4 +65,9 @@ class WrapperComponent extends React.Component {
     }
 }
 
-ReactDOM.render(<WrapperComponent />, document.getElementById('react'))
+ReactDOM.render(
+    <Provider store={store}>
+        <WrapperComponent />
+    </Provider>,
+    document.getElementById('react')
+)

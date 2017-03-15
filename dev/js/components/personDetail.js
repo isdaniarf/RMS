@@ -2,6 +2,16 @@ import React from 'react';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import { ListItem } from 'material-ui/List';
 import TextField from 'material-ui/TextField';
+import * as Util from '../util/util'
+import DatePicker from 'material-ui/DatePicker';
+import AppBar from 'material-ui/AppBar';
+
+import { connect } from 'react-redux'
+import reducePerson from '../reducers/reducePerson'
+import * as actionIndex from '../actions/actionIndex'
+import { bindActionCreators } from 'redux'
+
+// import globalStyles from '../../assets/css/global.css';
 
 const styles = {
     grid: {
@@ -16,131 +26,138 @@ const styles = {
     }
 };
 
-const PersonDetail = () => (
-    <Table
-        selectable={false}
-        multiSelectable={false}
-        displaySelectAll={false}
-        adjustForCheckbox={false}
-    >
-        <TableBody
-            displayRowCheckbox={false}
-            displayBorder={false}
-        >
-            <TableRow displayBorder={false}>
-                <TableRowColumn>
-                    <div style={styles.grid}>
-                        <div style={styles.infoHeader}>First Name</div>
-                        <TextField style={styles.infoValue} defaultValue='Isdaniar' />
-                    </div>
-                </TableRowColumn>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Sub Division'
-                        secondaryText={<TextField defaultValue='Java Bootcamp' />}
-                        secondaryTextLines={2}
-                    />
-                </TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Last Name'
-                        secondaryText='Fithrantyo'
-                    />
-                </TableRowColumn>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Status'
-                        secondaryText='Permanent'
-                    />
-                </TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Gender'
-                        secondaryText='Male'
-                    />
-                </TableRowColumn>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Suspend Date'
-                        secondaryText='-'
-                    />
-                </TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Date Of Birth'
-                        secondaryText='April 7, 1992'
-                    />
-                </TableRowColumn>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Hired Date'
-                        secondaryText='June 2, 2014'
-                    />
-                </TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Nationality'
-                        secondaryText='Indonesian'
-                    />
-                </TableRowColumn>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Grade'
-                        secondaryText='SE-PG'
-                    />
-                </TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Marital Status'
-                        secondaryText='Single'
-                    />
-                </TableRowColumn>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Division'
-                        secondaryText='CDC'
-                    />
-                </TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='Phone'
-                        secondaryText='+6281219518694'
-                    />
-                </TableRowColumn>
-                <TableRowColumn>
-                    <ListItem
-                        disabled={true}
-                        primaryText='E-mail'
-                        secondaryText='isdaniar.fithrantyo@mitrais.com'
-                    />
-                </TableRowColumn>
-            </TableRow>
-        </TableBody>
-    </Table>
-);
+class PersonDetail extends React.Component {
+    render() {
+        let content = Util.isObjectEmpty(this.props.person) ?
+            <h1>Select one of the employees</h1> :
+            <div>
+                <Table
+                    selectable={false}
+                    multiSelectable={false}
+                    displaySelectAll={false}
+                    adjustForCheckbox={false}
+                >
+                    <TableBody
+                        displayRowCheckbox={false}
+                        displayBorder={false}
+                    >
+                        <TableRow displayBorder={false}>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>First Name</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} disabled={true} value={this.props.person.detail.firstName || ''} />
+                                </div>
+                            </TableRowColumn>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Sub Division</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.subDivision || ''} />
+                                </div>
+                            </TableRowColumn>
+                        </TableRow>
+                        <TableRow displayBorder={false}>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Last Name</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.lastName || ''} />
+                                </div>
+                            </TableRowColumn>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Status</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.employmentStatus || ''} />
+                                </div>
+                            </TableRowColumn>
+                        </TableRow>
+                        <TableRow displayBorder={false}>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Gender</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.gender || ''} />
+                                </div>
+                            </TableRowColumn>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Suspend Date</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.suspendDate || ''} />
+                                </div>
+                            </TableRowColumn>
+                        </TableRow>
+                        <TableRow displayBorder={false}>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Date of Birth</div>
+                                    <DatePicker hintText="Landscape Dialog" value={new Date(this.props.person.detail.dob)} mode="landscape" />
+                                </div>
+                            </TableRowColumn>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Hired Date</div>
+                                    <DatePicker hintText="Landscape Dialog" value={new Date(this.props.person.detail.doj)} mode="landscape" />
+                                </div>
+                            </TableRowColumn>
+                        </TableRow>
+                        <TableRow displayBorder={false}>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Nationality</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.nationality || ''} />
+                                </div>
+                            </TableRowColumn>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Grade</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.grade || ''} />
+                                </div>
+                            </TableRowColumn>
+                        </TableRow>
+                        <TableRow displayBorder={false}>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Marital Status</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.maritalStatus || ''} />
+                                </div>
+                            </TableRowColumn>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Division</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.Division || ''} />
+                                </div>
+                            </TableRowColumn>
+                        </TableRow>
+                        <TableRow displayBorder={false}>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>Phone</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.mobileNo || ''} />
+                                </div>
+                            </TableRowColumn>
+                            <TableRowColumn>
+                                <div style={styles.grid}>
+                                    <div style={styles.infoHeader}>E-mail</div>
+                                    <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.email || ''} />
+                                </div>
+                            </TableRowColumn>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+                <AppBar
+                    title="Title"
+                    iconClassNameRight="muidocs-icon-navigation-expand-more"
+                />
+            </div>
+        return (
+            <div>
+                {content}
+            </div>
+        )
+    }
+}
 
-export default PersonDetail;
+function mapStateToProps(state, ownProps) {
+    return {
+        person: state.reducePerson,
+    };
+}
+
+export default connect(mapStateToProps)(PersonDetail);
