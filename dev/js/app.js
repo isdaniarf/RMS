@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import '../assets/css/global.css'
 import { black, white, indigo500, indigo300 } from 'material-ui/styles/colors';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
@@ -9,6 +10,9 @@ import EmployeeList from './components/EmployeeList';
 import ProfileHeader from './components/profileHeader';
 import RightSection from './components/rightSection';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import 'material-design-lite/material.js';
+import 'material-design-lite/material.css';
+// import 'material-design-lite/material.min.css';
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import rmsApp from './reducers/reducerIndex'
@@ -81,7 +85,7 @@ const leftSection = {
 const rightSection = {
     width: '80%',
     // height: '100%',
-    float: 'right',
+    float: 'right'
     // overflow: 'hidden',
     // position: 'relative',
     // display: 'block'
@@ -94,6 +98,10 @@ const wrapperStyle = {
     padding: 0
 }
 
+const gridStyle = {
+    padding: 0
+}
+
 class WrapperComponent extends React.Component {
 
     render() {
@@ -103,15 +111,32 @@ class WrapperComponent extends React.Component {
                     <div>
                         <TopBar />
                     </div>
-                    <div style={leftSection}>
+
+                    <main className="mdl-layout__content">
+                    <div className="mdl-grid">
+                        <div className="mdl-cell mdl-cell--4-col" style={gridStyle}>
+                            {/*<div style={leftSection}>*/}
+                                <EmployeeList />
+                            {/*</div>*/}
+                        </div>
+                        <div className="mdl-cell mdl-cell--8-col">
+                            <MuiThemeProvider muiTheme={secondaryTheme}>
+                            <div style={rightSection}>
+                                <RightSection />
+                            </div>
+                            </MuiThemeProvider>
+                        </div>
+                    </div>
+                    </main>
+
+                    {/*<div style={leftSection}>
                         <EmployeeList />
                     </div>
-                    {/*<br style={{clear:'both'}}/>*/}
                     <MuiThemeProvider muiTheme={secondaryTheme}>
                         <div style={rightSection}>
                             <RightSection />
                         </div>
-                    </MuiThemeProvider>
+                    </MuiThemeProvider>*/}
                 </div>
             </MuiThemeProvider>
         )
