@@ -18,10 +18,12 @@ body {
 .material-icons.md-light.md-inactive {
   color: rgba(255, 255, 255, 0.3); }
 .mdl-grid {
+  margin: 0px;
   padding: 0px;
 }
 .mdl-cell {
   margin: 0px;
+  padding: 0px;
 }
 .mdl-layout__header-row .mdl-navigation__link {
   padding: 0 5px;
@@ -57,6 +59,7 @@ body {
   height: 47px;
 }	
 .mdl-cell--4-col, .mdl-cell--4-col-desktop.mdl-cell--4-col-desktop {
+  padding: 0px;
   width: calc(33.3333333333%);
 }		
 .mdl-cell--8-col, .mdl-cell--8-col-desktop.mdl-cell--8-col-desktop {

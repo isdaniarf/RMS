@@ -5,15 +5,12 @@ import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
 import { white, indigo300, cyan500, pinkA200, transparent } from 'material-ui/styles/colors';
 import Paper from 'material-ui/Paper';
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
-import Chip from 'material-ui/Chip';
-import ContentSort from 'material-ui/svg-icons/content/sort'
-import ContentFilterList from 'material-ui/svg-icons/content/filter-list'
-import ActionSearch from 'material-ui/svg-icons/action/search'
+
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import muiTheme from '../app'
+import SearchBar from './searchBar'
 
 import { connect } from 'react-redux'
 import reducePerson from '../reducers/reducePerson'
@@ -39,43 +36,19 @@ const textFieldStyle = {
   width: '100%'
 }
 
+const listStyle = {
+  overflowY: 'scroll'
+}
+
 const elementStyle = {
   marginLeft: 20,
   marginRight: 10
-}
-
-const listStyle = {
-  overflowY: 'scroll'
 }
 
 function expandContact() {
   return {
     type: EXPAND_CONTACT,
     text
-  }
-}
-
-class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <Toolbar style={toolbarStyle}>
-        <ToolbarGroup firstChild={true}>
-          <ActionSearch style={elementStyle} />
-          <TextField style={textFieldStyle} />
-        </ToolbarGroup>
-        <ToolbarGroup>
-          <ContentSort />
-          <ContentFilterList />
-          <Chip>
-            9999
-          </Chip>
-        </ToolbarGroup>
-      </Toolbar>
-    );
   }
 }
 
@@ -90,14 +63,14 @@ class EmployeeList extends React.Component {
         <SearchBar />
         <MuiThemeProvider muiTheme={muiTheme}>
           <List style={listStyle}>
-            {this.props.employees.map((contact) => (
-              <div key={contact.name}>
+            {this.props.employees.map((person) => (
+              <div key={person.name}>
                 <ListItem
-                  primaryText={contact.name}
-                  secondaryText={contact.grade}
+                  primaryText={person.name}
+                  secondaryText={person.grade}
                   leftIcon={<ActionGrade color={pinkA200} />}
-                  leftAvatar={<Avatar src={contact.avatar} />}
-                  onTouchTap={() => this.props.actions.boundShowPersonDetail(contact)}
+                  leftAvatar={<Avatar src={person.avatar} />}
+                  onTouchTap={() => this.props.actions.boundShowPersonDetail(person)}
                 />
                 {/*<Divider />*/}
               </div>

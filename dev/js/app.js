@@ -31,7 +31,8 @@ export const muiTheme = getMuiTheme({
     palette: {
         primary1Color: indigo500,
         textColor: white,
-        alternateTextColor: white
+        alternateTextColor: white,
+        // disabledColor: white
     },
     appBar: {
         height: 70,
@@ -84,9 +85,10 @@ const leftSection = {
 
 const rightSection = {
     width: '80%',
+    // minWidth: 1000,
     // height: '100%',
-    float: 'right'
-    // overflow: 'hidden',
+    float: 'right',
+    overflow: 'hidden',
     // position: 'relative',
     // display: 'block'
 };
@@ -112,31 +114,14 @@ class WrapperComponent extends React.Component {
                         <TopBar />
                     </div>
 
-                    <main className="mdl-layout__content">
-                    <div className="mdl-grid">
-                        <div className="mdl-cell mdl-cell--4-col" style={gridStyle}>
-                            {/*<div style={leftSection}>*/}
-                                <EmployeeList />
-                            {/*</div>*/}
-                        </div>
-                        <div className="mdl-cell mdl-cell--8-col">
-                            <MuiThemeProvider muiTheme={secondaryTheme}>
-                            <div style={rightSection}>
-                                <RightSection />
-                            </div>
-                            </MuiThemeProvider>
-                        </div>
-                    </div>
-                    </main>
-
-                    {/*<div style={leftSection}>
+                    <div style={leftSection}>
                         <EmployeeList />
                     </div>
                     <MuiThemeProvider muiTheme={secondaryTheme}>
                         <div style={rightSection}>
                             <RightSection />
                         </div>
-                    </MuiThemeProvider>*/}
+                    </MuiThemeProvider>
                 </div>
             </MuiThemeProvider>
         )
