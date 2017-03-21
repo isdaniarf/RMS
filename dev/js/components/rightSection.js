@@ -9,7 +9,10 @@ import NotificationWC from 'material-ui/svg-icons/notification/wc';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import MapsPlace from 'material-ui/svg-icons/maps/place';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {personDetailTheme, secondaryTheme} from '../app'
+import { personDetailTheme, secondaryTheme } from '../app'
+import GradeHistory from './gradeHistory'
+import FamilyMembers from './familyMembers'
+import EmploymentHistory from './employmentHistory'
 
 import { indigo300, blue500, red500, greenA200 } from 'material-ui/styles/colors';
 import SvgIcon from 'material-ui/SvgIcon';
@@ -18,43 +21,44 @@ const tabStyle = {
   backgroundColor: indigo300
 }
 
+const gradeHistoryStyle = {
+  margin: 40
+}
+
 const RightSection = () => (
   <Tabs>
     <Tab label={<SocialPerson />} >
       <div>
         <MuiThemeProvider muiTheme={personDetailTheme}>
-        <PersonDetail />
+          <PersonDetail />
         </MuiThemeProvider>
       </div>
     </Tab>
     <Tab label={<ActionHistory />} >
-      <div>
-        <h2>Tab Two</h2>
-        <p>
-          This is another example tab.
-        </p>
+      <div style={gradeHistoryStyle}>
+        <MuiThemeProvider muiTheme={personDetailTheme}>
+          <EmploymentHistory />
+        </MuiThemeProvider>
       </div>
     </Tab>
     <Tab
       label={<MapsLayers />}
       data-route="/home"
     >
-      <div>
-        <h2>Tab Three</h2>
-        <p>
-          This is a third example tab.
-        </p>
+      <div style={gradeHistoryStyle}>
+        <MuiThemeProvider muiTheme={personDetailTheme}>
+          <GradeHistory />
+        </MuiThemeProvider>
       </div>
     </Tab>
     <Tab
       label={<NotificationWC />}
       data-route="/home"
     >
-      <div>
-        <h2>Tab Three</h2>
-        <p>
-          This is a third example tab.
-        </p>
+      <div style={gradeHistoryStyle}>
+        <MuiThemeProvider muiTheme={personDetailTheme}>
+          <FamilyMembers />
+        </MuiThemeProvider>
       </div>
     </Tab>
     <Tab
@@ -72,11 +76,10 @@ const RightSection = () => (
       label={<MapsPlace />}
       data-route="/home"
     >
-      <div>
-        <h2>Tab Three</h2>
-        <p>
-          This is a third example tab.
-        </p>
+      <div style={gradeHistoryStyle}>
+        <MuiThemeProvider muiTheme={personDetailTheme}>
+          <EmploymentHistory />
+        </MuiThemeProvider>
       </div>
     </Tab>
   </Tabs>

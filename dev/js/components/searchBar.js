@@ -15,7 +15,7 @@ import { bindActionCreators } from 'redux'
 
 const toolbarStyle = {
     backgroundColor: indigo300,
-    height: 46,
+    height: 48,
     width: '100%'
 }
 
@@ -44,11 +44,11 @@ class SearchBar extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        // console.log('props',this.props)
     }
 
     handleChange(event, value) {
-        this.props.actions.boundFilterEmployees(value)
+        this.props.actions.boundFilterEmployees(value);
+        // console.log('props', this.props)
     }
 
     render() {
@@ -72,7 +72,7 @@ class SearchBar extends Component {
                     <ContentFilterList />
                     <Chip>
                         <div style={{ color: black }}>
-                            {this.props.employees.length}
+                            {this.props.employees.initial.length}
                         </div>
                     </Chip>
                 </ToolbarGroup>

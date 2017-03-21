@@ -1,11 +1,21 @@
-const reduceEmployees = (state = [], action) => {
+const defaultState = {
+    initial: [],
+    filtered: []
+}
+
+const reduceEmployees = (state = defaultState, action) => {
     switch (action.type) {
         case 'LOAD_CONTACTS':
-            return action.employees
+            return Object.assign({}, state, {
+                initial: action.employees,
+                filtered: action.employees
+            })
         case 'FILTER_EMPLOYEES':
-            console.log(action.filterKey)
-            console.log(state.filter((a) => a.name.includes(action.filterKey)))
-            return state.filter((a) => a.name.includes(action.filterKey))
+            // console.log(action.filterKey)
+            // console.log(state.initial.filter((a) => a.name.includes(action.filterKey)))
+            return Object.assign({}, state, {
+                filtered: state.initial.filter((a) => a.name.toLowerCase().includes(action.filterKey))
+            })
         default:
             return state
     }

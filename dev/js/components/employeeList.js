@@ -3,9 +3,11 @@ import { List, ListItem } from 'material-ui/List';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
-import { white, indigo300, cyan500, pinkA200, transparent } from 'material-ui/styles/colors';
+import { white, grey800, indigo100, indigo300, cyan500, pinkA200, transparent } from 'material-ui/styles/colors';
 import Paper from 'material-ui/Paper';
-
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import IconButton from 'material-ui/IconButton';
+import ContentAdd from 'material-ui/svg-icons/content/add'
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -21,36 +23,53 @@ import { bindActionCreators } from 'redux'
 var employees = require('../data/persons.json');
 const EXPAND_CONTACT = 'EXPAND_CONTACT';
 
-const style = {
-  // backgroundColor: pinkA200,
+const paperStyle = {
   minWidth: 300
 };
 
-const toolbarStyle = {
-  backgroundColor: indigo300,
-  height: 46,
-  width: '100%'
-}
-
-const textFieldStyle = {
-  width: '100%'
-}
-
 const listStyle = {
-  overflowY: 'scroll'
+  overflowY: 'scroll',
+  padding: 0
 }
 
-const elementStyle = {
-  marginLeft: 20,
-  marginRight: 10
+const addEmployeeButton = {
+  position: 'relative',
+  bottom: 20,
+  left: 210
 }
 
-function expandContact() {
-  return {
-    type: EXPAND_CONTACT,
-    text
-  }
+const listItemStyle = {
+  fontSize: 14,
+  fontWeight: 'bold',
+  lineHeight: '130%',
+  backgroundColor: indigo100
 }
+
+const personNameStyle = {
+  marginLeft: 10
+}
+
+const subTextStyle = {
+  fontSize: 12,
+  fontWeight: 'normal',
+  color: grey800,
+  marginLeft: 10
+}
+
+const styles = {
+  large: {
+    width: 40
+  },
+};
+
+const PersonName = (props) => (
+  <div style={personNameStyle}>{props.person.name}</div>
+)
+
+const PersonDetail = (props) => (
+  <div style={subTextStyle}>{props.person.grade}, {props.person.detail.division} {props.person.detail.subDivision}<br/>
+  {props.person.city}, {props.person.mobileNo}</div>
+)
 
 class EmployeeList extends React.Component {
   componentWillMount() {
@@ -59,22 +78,25 @@ class EmployeeList extends React.Component {
 
   render() {
     return (
-      <Paper style={style} zDepth={0} >
+      <Paper style={paperStyle} zDepth={0} >
         <SearchBar />
         <MuiThemeProvider muiTheme={muiTheme}>
           <List style={listStyle}>
-            {this.props.employees.map((person) => (
+            {this.props.employees.filtered.map((person) => (
               <div key={person.name}>
                 <ListItem
-                  primaryText={person.name}
-                  secondaryText={person.grade}
-                  leftIcon={<ActionGrade color={pinkA200} />}
-                  leftAvatar={<Avatar src={person.avatar} />}
+                  primaryText={<PersonName person={person}/>}
+                  secondaryText={<PersonDetail person={person}/>}
+                  secondaryTextLines={2}
+                  leftAvatar={<Avatar src={person.avatar} size={52}/>}                  
                   onTouchTap={() => this.props.actions.boundShowPersonDetail(person)}
+                  style={listItemStyle}
                 />
-                {/*<Divider />*/}
               </div>
             ))}
+            <FloatingActionButton secondary={true} style={addEmployeeButton}>
+              <ContentAdd style={styles.large}/>
+            </FloatingActionButton>
           </List>
         </MuiThemeProvider>
       </Paper>

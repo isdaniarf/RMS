@@ -12,7 +12,8 @@ import RightSection from './components/rightSection';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import 'material-design-lite/material.js';
 import 'material-design-lite/material.css';
-// import 'material-design-lite/material.min.css';
+import ActionSettings from 'material-ui/svg-icons/action/settings'
+import ActionPowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new'
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import rmsApp from './reducers/reducerIndex'
@@ -67,7 +68,7 @@ const MyButton = () => (
 const TopBar = () => (
     <AppBar
         title={<ProfileHeader func={'header clicked'} />}
-        iconClassNameRight='muidocs-icon-navigation-expand-more'
+        iconClassNameRight='muidocs-icon-action-settings'
     >
 
     </AppBar>
@@ -95,9 +96,9 @@ const rightSection = {
 
 const wrapperStyle = {
     // minWidth: 800,
-    clear: 'both',
-    margin: 0,
-    padding: 0
+    // clear: 'both',
+    // margin: 0,
+    // padding: 0
 }
 
 const gridStyle = {
