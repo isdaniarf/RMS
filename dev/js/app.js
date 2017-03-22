@@ -75,23 +75,23 @@ const TopBar = () => (
 );
 
 const leftSection = {
-    width: '20%',
+    width: '22%',
     height: 800,
     // minWidth: 300,
     float: 'left',
     // overflow: 'hidden',
     // position: 'relative',
-    display: 'flex'
+    // display: 'flex'
 };
 
 const rightSection = {
-    width: '80%',
+    width: '78%',
     // minWidth: 1000,
     // height: '100%',
-    float: 'right',
+    // float: 'right',
     overflow: 'hidden',
-    // position: 'relative',
-    // display: 'block'
+    position: 'relative',
+    display: 'inline-block'
 };
 
 const wrapperStyle = {

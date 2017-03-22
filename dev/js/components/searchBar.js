@@ -16,7 +16,7 @@ import { bindActionCreators } from 'redux'
 const toolbarStyle = {
     backgroundColor: indigo300,
     height: 48,
-    width: '100%'
+    // width: '100%'
 }
 
 const elementStyle = {

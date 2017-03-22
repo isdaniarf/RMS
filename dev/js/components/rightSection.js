@@ -13,6 +13,7 @@ import { personDetailTheme, secondaryTheme } from '../app'
 import GradeHistory from './gradeHistory'
 import FamilyMembers from './familyMembers'
 import EmploymentHistory from './employmentHistory'
+import LocationHistory from './locationHistory'
 
 import { indigo300, blue500, red500, greenA200 } from 'material-ui/styles/colors';
 import SvgIcon from 'material-ui/SvgIcon';
@@ -66,10 +67,6 @@ const RightSection = () => (
       data-route="/home"
     >
       <div>
-        <h2>Tab Three</h2>
-        <p>
-          This is a third example tab.
-        </p>
       </div>
     </Tab>
     <Tab
@@ -78,7 +75,7 @@ const RightSection = () => (
     >
       <div style={gradeHistoryStyle}>
         <MuiThemeProvider muiTheme={personDetailTheme}>
-          <EmploymentHistory />
+          <LocationHistory />
         </MuiThemeProvider>
       </div>
     </Tab>

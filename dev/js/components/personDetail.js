@@ -62,9 +62,9 @@ const leftSection = {
     // minWidth: 300,
     width: 800,
     float: 'left',
-    // overflow: 'hidden',
+    overflow: 'hidden',
     // position: 'relative',
-    display: 'flex'
+    display: 'inline-block'
 };
 
 const rightSection = {
@@ -72,10 +72,15 @@ const rightSection = {
     width: '15%',
     // height: '100%',
     // float: 'right',
-    // overflow: 'hidden',
+    overflow: 'hidden',
     position: 'relative',
     display: 'inline-block'
 };
+
+const tableStyle = {
+    fontSize: '50%',
+    padding: 10
+}
 
 class PersonDetail extends React.Component {
     render() {
@@ -88,7 +93,7 @@ class PersonDetail extends React.Component {
                         multiSelectable={false}
                         displaySelectAll={false}
                         adjustForCheckbox={false}
-
+                        style={tableStyle}
                     >
                         <TableBody
                             displayRowCheckbox={false}
@@ -197,7 +202,8 @@ class PersonDetail extends React.Component {
                 </div>
                 <br />
                 <div style={rightSection}>
-                    <FloatingActionButton mini={true} style={changePicButton}>
+                    <input id="myInput" type="file" ref={(ref) => this.upload = ref} style={{ display: 'none' }} />
+                    <FloatingActionButton mini={true} style={changePicButton} type='file' onClick={(e) => this.upload.click() }>
                         <ImageCameraAlt />
                     </FloatingActionButton>
                     <Avatar src={this.props.person.avatar} size={130} />

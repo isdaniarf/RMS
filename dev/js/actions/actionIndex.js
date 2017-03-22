@@ -2,6 +2,7 @@ export const SHOW_PERSON_DETAIL = 'SHOW_PERSON_DETAIL'
 export const LOAD_CONTACTS = 'LOAD_CONTACTS'
 export const CHANGE_GRADE = 'CHANGE_GRADE'
 export const FILTER_EMPLOYEES = 'FILTER_EMPLOYEES'
+export const SET_SELECTED_EMPLOYEE = 'SET_SELECTED_EMPLOYEE'
 
 var employees = require('../data/persons.json');
 
@@ -33,6 +34,13 @@ export const filterEmployees = (filterKey) => {
   }
 }
 
+export const setSelectedEmployee = (person) => {
+  return {
+    type: SET_SELECTED_EMPLOYEE,
+    person
+  }
+}
+
 export const boundShowPersonDetail = (person) => (dispatch) => {
   dispatch(showPersonDetail(person))
 }
@@ -47,4 +55,8 @@ export const boundLoadContacts = (employees) => (dispatch) => {
 
 export const boundFilterEmployees = (filterKey) => (dispatch) => {
   dispatch(filterEmployees(filterKey))
+}
+
+export const boundSetSelectedEmployee = (person) => (dispatch) => {
+  dispatch(setSelectedEmployee(person))
 }

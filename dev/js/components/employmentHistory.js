@@ -45,27 +45,19 @@ export default class EmploymentHistory extends Component {
                         <TableRowColumn style={leftStyle}>
                             FEBRUARY
                             <h4>2016 - Present</h4>
+                            <h5>Mitrais</h5>
+                            <h6>Analyst Programmer</h6>
                         </TableRowColumn>
                         <TableRowColumn style={detailStyle}>
-                            <SelectField
-                                floatingLabelText='Office Location'
-                                value={1}
-                            >
-                                <MenuItem value={1} primaryText="Yogyakarta Office" />
-                                <MenuItem value={2} primaryText="Bandung Office" />
-                                <MenuItem value={3} primaryText="Bali Office" />
-                                <MenuItem value={4} primaryText="Jakarta Office" />
-                                <MenuItem value={5} primaryText="Hanoi Office" />
-                            </SelectField>
-                            <br />
-                            <TextField
-                                multiLine={true}
-                                rows={2}
-                                defaultValue='Jl. Sidobali, Muja Muju, Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55165'
-                                floatingLabelText='Address'
-                                floatingLabelFixed={true}
-                                style={addressStyle}
-                            /><br />
+                            Job Description:<br />
+                            <ul>
+                                <li>Optimize performance at customer projects</li>
+                                <li>Working & implementing web portal using Liferay & gatein portal Internet banking system</li>
+                                <li>Managing & deploying & releasing production</li>
+                                <li>Lead IMB ODC team (7 members)</li>
+                                <li>Tools & Technology: InteliJ IDE, Jenkins, Git, Maven, sorna</li>
+                                <li>Others</li>
+                            </ul>
                         </TableRowColumn>
                         <TableRowColumn style={actionStyle}>
                             <ImageEdit />
@@ -76,27 +68,42 @@ export default class EmploymentHistory extends Component {
                         <TableRowColumn style={leftStyle}>
                             NOVEMBER - FEBRUARY
                             <h4>2013 - 2016</h4>
+                            <h5>ABB</h5>
+                            <h6>Software Engineer</h6>
                         </TableRowColumn>
                         <TableRowColumn style={detailStyle}>
-                            <SelectField
-                                floatingLabelText='Office Location'
-                                value={3}
-                            >
-                                <MenuItem value={1} primaryText="Yogyakarta Office" />
-                                <MenuItem value={2} primaryText="Bandung Office" />
-                                <MenuItem value={3} primaryText="Bali Office" />
-                                <MenuItem value={4} primaryText="Jakarta Office" />
-                                <MenuItem value={5} primaryText="Hanoi Office" />
-                            </SelectField>
-                            <br/>
-                            <TextField
-                                multiLine={true}
-                                fullWidth={true}
-                                defaultValue='Jl. Bypass Ngurah Rai gg. Mina Utama No. 1, ​​Suwung 80223, Bali'
-                                floatingLabelText='Address'
-                                floatingLabelFixed={true}
-                                style={addressStyle}
-                            />
+                            Job Description:<br />
+                            <ul>
+                            <li>Optimize performance at customer projects</li>
+                            <li>Working & implementing web portal using Liferay & gatein portal Internet banking system</li>
+                            <li>Managing & deploying & releasing production</li>
+                            <li>Lead IMB ODC team (7 members)</li>
+                            <li>Tools & Technology: InteliJ IDE, Jenkins, Git, Maven, sorna</li>
+                            <li>Others</li>
+                            </ul>
+                        </TableRowColumn>
+                        <TableRowColumn style={actionStyle}>
+                            <ImageEdit />
+                            <ActionDelete />
+                        </TableRowColumn>
+                    </TableRow>
+                    <TableRow>
+                        <TableRowColumn style={leftStyle}>
+                            NOVEMBER - FEBRUARY
+                            <h4>2013 - 2016</h4>
+                            <h5>Stanford University</h5>
+                            <h6>Researcher</h6>
+                        </TableRowColumn>
+                        <TableRowColumn style={detailStyle}>
+                            Job Description:<br />
+                            <ul>
+                            <li>Algorithm study</li>
+                            <li>Working & implementing web portal using Liferay & gatein portal Internet banking system</li>
+                            <li>Managing & deploying & releasing production</li>
+                            <li>Lead IMB ODC team (7 members)</li>
+                            <li>Tools & Technology: InteliJ IDE, Jenkins, Git, Maven, sorna</li>
+                            <li>Others</li>
+                            </ul>
                         </TableRowColumn>
                         <TableRowColumn style={actionStyle}>
                             <ImageEdit />
