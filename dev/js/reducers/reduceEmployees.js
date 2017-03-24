@@ -20,8 +20,8 @@ const reduceEmployees = (state = defaultState, action) => {
             // let newFiltered = JSON.parse(JSON.stringify(state.filtered));
             let newFiltered = [...state.filtered]
             newFiltered.forEach(a => a.selected = a.id == action.person.id ? true : a.selected = false)
-            console.log(newFiltered)
-            console.log(state.filtered)
+            // console.log(newFiltered)
+            // console.log(state.filtered)
             return Object.assign({}, state, {
                 filtered: newFiltered
             })

@@ -22,9 +22,7 @@ import reduceEmployees from '../reducers/reduceEmployees'
 import * as actionIndex from '../actions/actionIndex'
 import { bindActionCreators } from 'redux'
 
-var employees = require('../data/persons.json');
 const EXPAND_CONTACT = 'EXPAND_CONTACT';
-
 
 const paperStyle = {
   width: '100%',
@@ -48,10 +46,6 @@ const listItemStyle = {
   fontSize: 14,
   fontWeight: 'bold',
   lineHeight: '130%',
-  backgroundColor: white,
-  innerDiv: {
-    paddingRight: 0
-  }
 }
 
 const listItemStyleSelected = {
@@ -59,9 +53,7 @@ const listItemStyleSelected = {
   fontWeight: 'bold',
   lineHeight: '130%',
   backgroundColor: indigo100,
-  innerDiv: {
-    paddingRight: 0
-  }
+  zIndex: 0
 }
 
 const personNameStyle = {
@@ -94,11 +86,11 @@ const rightItemIconStyle = {
 }
 
 const PersonName = (props) => (
-  <div style={personNameStyle}>{props.person.name}</div>
+  <div style={personNameStyle}>{props.person.firstName + ' ' + props.person.lastName}</div>
 )
 
 const PersonDetail = (props) => (
-  <div style={subTextStyle}>{props.person.grade}, {props.person.detail.division} {props.person.detail.subDivision}<br />
+  <div style={subTextStyle}>{props.person.grade}, {props.person.division} {props.person.subdivision}<br />
     {props.person.city}, {props.person.mobileNo}</div>
 )
 
@@ -116,7 +108,22 @@ class EmployeeList extends React.Component {
   }
 
   componentWillMount() {
-    this.props.actions.boundLoadContacts(employees);
+    const myHeaders = new Headers();
+    const requestParam = {
+      method: 'GET',
+      headers: {'Access-Control-Allow-Origin':'*'},
+      mode: 'cors',
+      cache: 'default'
+    };
+    const employees = require('../data/persons.json');
+    let emps = [];
+    fetch('http://localhost:8080/app/all', requestParam).then(x => {
+      return x.json();
+    }).then(y => {
+      emps = y;
+      this.props.actions.boundLoadContacts(emps);
+      // console.log(y);
+    });
   }
 
   handleChange(value) {
@@ -131,23 +138,23 @@ class EmployeeList extends React.Component {
         <SearchBar />
         <MuiThemeProvider muiTheme={muiTheme}>
           <div>
-          <List style={listStyle}>
-            {this.props.employees.filtered.map((person) => (
-              <ListItem
-                primaryText={<PersonName person={person} />}
-                secondaryText={<PersonDetail person={person} />}
-                secondaryTextLines={2}
-                leftAvatar={<Avatar src={person.avatar} size={52} />}
-                rightIcon={<RightItemIcon />}
-                onTouchTap={() => this.handleChange(person)}
-                style={person.selected ? listItemStyleSelected : listItemStyle}
-                key={person.name}
-              />
-            ))}
-          </List>
-          <FloatingActionButton secondary={true} mini={false} style={addEmployeeButton} zDepth={4}>
-            <ContentAdd style={styles.large} />
-          </FloatingActionButton>
+            <List style={listStyle}>
+              {this.props.employees.filtered.map((person) => (
+                <ListItem
+                  primaryText={<PersonName person={person} />}
+                  secondaryText={<PersonDetail person={person} />}
+                  secondaryTextLines={2}
+                  leftAvatar={<Avatar src={person.avatar} size={52} />}
+                  rightIcon={<RightItemIcon />}
+                  onTouchTap={() => this.handleChange(person)}
+                  style={person.selected ? listItemStyleSelected : listItemStyle}
+                  key={person.firstName}
+                />
+              ))}
+            </List>
+            <FloatingActionButton secondary={true} mini={false} style={addEmployeeButton} zDepth={4}>
+              <ContentAdd style={styles.large} />
+            </FloatingActionButton>
           </div>
         </MuiThemeProvider>
       </Paper>

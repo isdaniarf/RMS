@@ -103,13 +103,13 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>First Name</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.firstName || ''} />
+                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.firstName || ''} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Sub Division</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.subDivision || ''} />
+                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.subdivision || ''} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -117,13 +117,13 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Last Name</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.lastName || ''} />
+                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.lastName || ''} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Status</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.employmentStatus || ''} />
+                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.employmentStatus || ''} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -131,13 +131,13 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Gender</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.gender || ''} />
+                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.gender || ''} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Suspend Date</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.suspendDate || ''} />
+                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.suspendDate || ''} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -145,13 +145,13 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Date of Birth</div>
-                                        <DatePicker hintText="Landscape Dialog" value={new Date(this.props.person.detail.dob)} mode="landscape" />
+                                        <DatePicker hintText="Landscape Dialog" value={new Date(this.props.person.dob)} mode="landscape" />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Hired Date</div>
-                                        <DatePicker hintText="Landscape Dialog" value={new Date(this.props.person.detail.doj)} mode="landscape" />
+                                        <DatePicker hintText="Landscape Dialog" value={new Date(this.props.person.doj)} mode="landscape" />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -159,7 +159,7 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Nationality</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.nationality || ''} />
+                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.nationality || ''} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
@@ -173,13 +173,13 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Marital Status</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.maritalStatus || ''} />
+                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.maritalStatus || ''} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Division</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.Division || ''} />
+                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.Division || ''} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -193,7 +193,7 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>E-mail</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.detail.email || ''} />
+                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.email || ''} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
