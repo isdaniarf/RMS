@@ -11,10 +11,9 @@ const reduceEmployees = (state = defaultState, action) => {
                 filtered: action.employees
             })
         case 'FILTER_EMPLOYEES':
-            // console.log(action.filterKey)
-            // console.log(state.initial.filter((a) => a.name.includes(action.filterKey)))
+            // console.log(state)
             return Object.assign({}, state, {
-                filtered: state.initial.filter(a => a.name.toLowerCase().includes(action.filterKey))
+                filtered: state.initial.filter(a => (a.firstName+' '+a.lastName).toLowerCase().includes(action.filterKey))
             })
         case 'SET_SELECTED_EMPLOYEE':
             // let newFiltered = JSON.parse(JSON.stringify(state.filtered));

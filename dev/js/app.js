@@ -25,7 +25,7 @@ injectTapEventPlugin();
 
 // require('./style.css')
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-let store = createStore(rmsApp, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(rmsApp, composeEnhancers(applyMiddleware(thunk)));
 var employees = require('./data/persons.json');
 
 export const muiTheme = getMuiTheme({

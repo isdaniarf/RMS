@@ -49,8 +49,22 @@ export const boundChangeGrade = (grade) => (dispatch) => {
   dispatch(changeGrade(grade))
 }
 
-export const boundLoadContacts = (employees) => (dispatch) => {
-  dispatch(loadContacts(employees))
+export const boundLoadContacts = () => (dispatch) => {
+  const myHeaders = new Headers();
+  const requestParam = {
+    method: 'GET',
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    mode: 'cors',
+    cache: 'default'
+  };
+  const employees = require('../data/persons.json');
+  let emps = [];
+  fetch('http://localhost:8080/app/all', requestParam).then(x => {
+    return x.json();
+  }).then(y => {
+    emps = y;
+    dispatch(loadContacts(emps))
+  });
 }
 
 export const boundFilterEmployees = (filterKey) => (dispatch) => {

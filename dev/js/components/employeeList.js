@@ -108,22 +108,7 @@ class EmployeeList extends React.Component {
   }
 
   componentWillMount() {
-    const myHeaders = new Headers();
-    const requestParam = {
-      method: 'GET',
-      headers: {'Access-Control-Allow-Origin':'*'},
-      mode: 'cors',
-      cache: 'default'
-    };
-    const employees = require('../data/persons.json');
-    let emps = [];
-    fetch('http://localhost:8080/app/all', requestParam).then(x => {
-      return x.json();
-    }).then(y => {
-      emps = y;
-      this.props.actions.boundLoadContacts(emps);
-      // console.log(y);
-    });
+    this.props.actions.boundLoadContacts();
   }
 
   handleChange(value) {
