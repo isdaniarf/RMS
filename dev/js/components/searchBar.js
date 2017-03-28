@@ -47,7 +47,8 @@ class SearchBar extends Component {
     }
 
     handleChange(event, value) {
-        this.props.actions.boundFilterEmployees(value);
+        // this.props.actions.boundFilterEmployees(value);
+        this.props.actions.boundSearchEmployees(value);
         // console.log('props', this.props)
     }
 

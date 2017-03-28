@@ -82,10 +82,26 @@ const tableStyle = {
     padding: 10
 }
 
-class PersonDetail extends React.Component {
+class EmployeeDetail extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event, value, id) {
+        // this.props.actions.boundFilterEmployees(value);
+        let updatedPerson = Object.assign({}, this.props.person);
+        if (event != null) {
+            updatedPerson[event.target.id] = value;
+        } else if (id != null) {
+            updatedPerson[id] = value;
+        }
+        this.props.actions.boundUpdateEmployee(updatedPerson);
+        // console.log('pressed: ', value)
+    }
     render() {
         let content = Util.isObjectEmpty(this.props.person) ?
-            <div/> :
+            <div /> :
             <div style={container}>
                 <div style={leftSection}>
                     <Table
@@ -103,13 +119,17 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>First Name</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.firstName || ''} />
+                                        <TextField id="firstName"
+                                            style={styles.infoValue}
+                                            value={this.props.person.firstName || ''}
+                                            onChange={this.handleChange} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Sub Division</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.subdivision || ''} />
+                                        <TextField id="subdivision" style={styles.infoValue} value={this.props.person.subdivision || ''}
+                                            onChange={this.handleChange} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -117,13 +137,15 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Last Name</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.lastName || ''} />
+                                        <TextField id="lastName" style={styles.infoValue} value={this.props.person.lastName || ''}
+                                            onChange={this.handleChange} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Status</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.employmentStatus || ''} />
+                                        <TextField id="employmentStatus" style={styles.infoValue} value={this.props.person.employmentStatus || ''}
+                                            onChange={this.handleChange} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -131,13 +153,17 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Gender</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.gender || ''} />
+                                        <TextField id="gender" style={styles.infoValue} value={this.props.person.gender || ''}
+                                            onChange={this.handleChange} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Suspend Date</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.suspendDate || ''} />
+                                        {/*<TextField id="suspendDate" style={styles.infoValue} value={this.props.person.suspendDate || ''}
+                                        onChange={this.handleChange} />*/}
+                                        <DatePicker id="suspendDate" value={this.props.person.suspendDate == null ? null : new Date(this.props.person.suspendDate)} mode="landscape"
+                                            onChange={(e, v) => this.handleChange(e, v, "suspendDate")} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -145,13 +171,15 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Date of Birth</div>
-                                        <DatePicker hintText="Landscape Dialog" value={new Date(this.props.person.dob)} mode="landscape" />
+                                        <DatePicker id="dob" hintText="dob" value={new Date(this.props.person.dob)} mode="landscape"
+                                            onChange={(e, v) => this.handleChange(e, v, "dob")} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Hired Date</div>
-                                        <DatePicker hintText="Landscape Dialog" value={new Date(this.props.person.doj)} mode="landscape" />
+                                        <DatePicker hintText="doj" value={new Date(this.props.person.doj)} mode="landscape"
+                                            onChange={(e, v) => this.handleChange(e, v, "doj")} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -159,13 +187,14 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Nationality</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.nationality || ''} />
+                                        <TextField id="nationality" style={styles.infoValue} value={this.props.person.nationality || ''}
+                                            onChange={this.handleChange} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Grade</div>
-                                        <SelectGrade />
+                                        <SelectGrade onChange={this.handleChange} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -173,13 +202,15 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Marital Status</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.maritalStatus || ''} />
+                                        <TextField id="maritalStatus" style={styles.infoValue} value={this.props.person.maritalStatus || ''}
+                                            onChange={this.handleChange} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Division</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.Division || ''} />
+                                        <TextField id="division" style={styles.infoValue} value={this.props.person.division || ''}
+                                            onChange={this.handleChange} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -187,13 +218,15 @@ class PersonDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Phone</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.mobileNo || ''} />
+                                        <TextField id="mobileNo" style={styles.infoValue} value={this.props.person.mobileNo || ''}
+                                            onChange={this.handleChange} />
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>E-mail</div>
-                                        <TextField id="Isdaniar" style={styles.infoValue} value={this.props.person.email || ''} />
+                                        <TextField id="email" style={styles.infoValue} value={this.props.person.email || ''}
+                                            onChange={this.handleChange} />
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -203,7 +236,7 @@ class PersonDetail extends React.Component {
                 <br />
                 <div style={rightSection}>
                     <input id="myInput" type="file" ref={(ref) => this.upload = ref} style={{ display: 'none' }} />
-                    <FloatingActionButton mini={true} style={changePicButton} type='file' onClick={(e) => this.upload.click() }>
+                    <FloatingActionButton mini={true} style={changePicButton} type='file' onClick={(e) => this.upload.click()}>
                         <ImageCameraAlt />
                     </FloatingActionButton>
                     <Avatar src={this.props.person.avatar} size={130} />
@@ -230,4 +263,10 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
-export default connect(mapStateToProps)(PersonDetail);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actionIndex, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDetail);

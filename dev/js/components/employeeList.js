@@ -89,7 +89,7 @@ const PersonName = (props) => (
   <div style={personNameStyle}>{props.person.firstName + ' ' + props.person.lastName}</div>
 )
 
-const PersonDetail = (props) => (
+const EmployeeDetail = (props) => (
   <div style={subTextStyle}>{props.person.grade}, {props.person.division} {props.person.subdivision}<br />
     {props.person.city}, {props.person.mobileNo}</div>
 )
@@ -113,7 +113,7 @@ class EmployeeList extends React.Component {
 
   handleChange(value) {
     // console.log(value)
-    this.props.actions.boundShowPersonDetail(value);
+    this.props.actions.boundShowEmployeeDetail(value);
     this.props.actions.boundSetSelectedEmployee(value);
   }
 
@@ -127,7 +127,7 @@ class EmployeeList extends React.Component {
               {this.props.employees.filtered.map((person) => (
                 <ListItem
                   primaryText={<PersonName person={person} />}
-                  secondaryText={<PersonDetail person={person} />}
+                  secondaryText={<EmployeeDetail person={person} />}
                   secondaryTextLines={2}
                   leftAvatar={<Avatar src={person.avatar} size={52} />}
                   rightIcon={<RightItemIcon />}

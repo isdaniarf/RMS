@@ -51,7 +51,7 @@ export const secondaryTheme = getMuiTheme({
     },
 });
 
-export const personDetailTheme = getMuiTheme({
+export const employeeDetailTheme = getMuiTheme({
     palette: {
         textColor: black,
         disabledColor: black
