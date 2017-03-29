@@ -14,32 +14,28 @@ const styles = {
     },
 };
 
-class SelectGrade extends Component {
+class SelectEmployeeField extends Component {
     constructor(){
         super();
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event, index, value) {
-        this.props.actions.boundChangeGrade(value)
+        this.props.actions.boundChangeSelectField(this.props.type, value)
     }
 
     render() {
-        let grades = ['SE-JP','SE-PG','SE-AP','SE-AN','MJF-PM']
+        // let grades = ['SE-JP','SE-PG','SE-AP','SE-AN','MJF-PM'];
+        let values = this.props.items;
         return (
             <div>
                 <SelectField
-                    value={this.props.person.grade}
+                    value={this.props.person[this.props.type]}
                     onChange={this.handleChange}
                 >
-                {grades.map((grade) => (
-                    <MenuItem key={grade} value={grade} primaryText={grade} />
+                {values.map((value) => (
+                    <MenuItem key={value} value={value} primaryText={value} />
                 ))}
-                    {/*<MenuItem value={1} primaryText="SE-JP" />
-                    <MenuItem value={2} primaryText="SE-PG" />
-                    <MenuItem value={3} primaryText="SE-AP" />
-                    <MenuItem value={4} primaryText="SE-AN" />
-                    <MenuItem value={5} primaryText="MJF-PM" />*/}
                 </SelectField>
             </div>
         );
@@ -58,4 +54,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectGrade);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectEmployeeField);

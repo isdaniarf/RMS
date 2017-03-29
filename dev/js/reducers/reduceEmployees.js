@@ -7,12 +7,12 @@ const defaultState = {
 
 const reduceEmployees = (state = defaultState, action) => {
     switch (action.type) {
-        case 'LOAD_CONTACTS':
+        case ActionIndex.LOAD_CONTACTS:
             return Object.assign({}, state, {
                 initial: action.employees,
                 filtered: action.employees
             });
-        case 'FILTER_EMPLOYEES':
+        case ActionIndex.FILTER_EMPLOYEES:
             // console.log(state)
             return Object.assign({}, state, {
                 filtered: state.initial.filter(a => (a.firstName+' '+a.lastName).toLowerCase().includes(action.filterKey))
@@ -22,7 +22,7 @@ const reduceEmployees = (state = defaultState, action) => {
             return Object.assign({}, state, {
                 filtered: [...action.filteredEmployees]
             });
-        case 'SET_SELECTED_EMPLOYEE':
+        case ActionIndex.SET_SELECTED_EMPLOYEE:
             // let newFiltered = JSON.parse(JSON.stringify(state.filtered));
             let newFiltered = [...state.filtered]
             newFiltered.forEach(a => a.selected = a.id == action.employee.id ? true : a.selected = false)

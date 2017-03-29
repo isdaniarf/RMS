@@ -1,18 +1,13 @@
 import * as ActionIndex from '../actions/actionIndex'
 
-const initialState = {
-    id: 1
-}
-
-const reducePerson = (state = {}, action) => {
+const reduceDependant = (state = {}, action) => {
     switch (action.type) {
         case ActionIndex.SHOW_PERSON_DETAIL:
-            // console.log(Object.assign({}, state, action.employee));
             return Object.assign({}, state, action.employee);
         case ActionIndex.CHANGE_GRADE:
-            let newValue = Object.assign({}, state);
-            newValue[action.fieldType] = action.value;
-            return newValue;
+            return Object.assign({}, state, {
+                grade: action.grade
+            });
         case ActionIndex.UPDATE_EMPLOYEE_UI:
             return Object.assign({}, action.employee);
         default:
@@ -20,4 +15,4 @@ const reducePerson = (state = {}, action) => {
     }
 }
 
-export default reducePerson
+export default reduceDependant

@@ -12,10 +12,12 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ImageCameraAlt from 'material-ui/svg-icons/image/camera-alt'
-import SelectGrade from './selectGrade'
+import SelectEmployeeField from './selectEmployeeField'
+import Snackbar from 'material-ui/Snackbar';
 
 import { connect } from 'react-redux'
 import reducePerson from '../reducers/reducePerson'
+import reduceSaveSnackbar from '../reducers/reduceSaveSnackbar'
 import * as actionIndex from '../actions/actionIndex'
 import { bindActionCreators } from 'redux'
 
@@ -85,11 +87,16 @@ const tableStyle = {
 class EmployeeDetail extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            snackbarOpen: false,
+        };
         this.handleChange = this.handleChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+        this.handleRequestClose = this.handleRequestClose.bind(this);
     }
 
     handleChange(event, value, id) {
-        // this.props.actions.boundFilterEmployees(value);
+        // console.log(event, value, id)
         let updatedPerson = Object.assign({}, this.props.person);
         if (event != null) {
             updatedPerson[event.target.id] = value;
@@ -97,9 +104,23 @@ class EmployeeDetail extends React.Component {
             updatedPerson[id] = value;
         }
         this.props.actions.boundUpdateEmployee(updatedPerson);
-        // console.log('pressed: ', value)
     }
+
+    handleSave(event, value) {
+        // console.log(this.props.person);
+        this.props.actions.boundSaveEmployee(this.props.person);
+        // this.props.actions.boundToggleSaveSnackbar(true)
+    }
+
+    handleRequestClose() {
+        this.props.actions.boundToggleSaveSnackbar(false)
+    };
+
     render() {
+        let grades = ['SE-JP', 'SE-PG', 'SE-AP', 'SE-AN', 'MJF-PM', 'CON-CON', 'ADM-ADM1', 'TR-TR2'];
+        let genders = ['Male', 'Female'];
+        let employmentStatuses = ['Permanent', 'Contract'];
+        let maritalStatuses = ['Single', 'Married'];
         let content = Util.isObjectEmpty(this.props.person) ?
             <div /> :
             <div style={container}>
@@ -144,8 +165,9 @@ class EmployeeDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Status</div>
-                                        <TextField id="employmentStatus" style={styles.infoValue} value={this.props.person.employmentStatus || ''}
-                                            onChange={this.handleChange} />
+                                        <SelectEmployeeField items={employmentStatuses} type="employmentStatus" onChange={this.handleChange} />
+                                        {/*<TextField id="employmentStatus" style={styles.infoValue} value={this.props.person.employmentStatus || ''}
+                                            onChange={this.handleChange} />*/}
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -153,8 +175,9 @@ class EmployeeDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Gender</div>
-                                        <TextField id="gender" style={styles.infoValue} value={this.props.person.gender || ''}
-                                            onChange={this.handleChange} />
+                                        <SelectEmployeeField items={genders} type="gender" onChange={this.handleChange} />
+                                        {/*<TextField id="gender" style={styles.infoValue} value={this.props.person.gender || ''}
+                                            onChange={this.handleChange} />*/}
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
@@ -194,7 +217,17 @@ class EmployeeDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Grade</div>
-                                        <SelectGrade onChange={this.handleChange} />
+                                        <SelectEmployeeField items={grades} type="grade" onChange={this.handleChange} />
+                                        {/*<div>
+                                            <SelectField
+                                                value={this.props.person.grade}
+                                                onChange={this.handleChange}
+                                            >
+                                                {grades.map((grade) => (
+                                                    <MenuItem key={grade} id="grade" value={grade} primaryText={grade} />
+                                                ))}
+                                            </SelectField>
+                                        </div>*/}
                                     </div>
                                 </TableRowColumn>
                             </TableRow>
@@ -202,8 +235,9 @@ class EmployeeDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Marital Status</div>
-                                        <TextField id="maritalStatus" style={styles.infoValue} value={this.props.person.maritalStatus || ''}
-                                            onChange={this.handleChange} />
+                                        <SelectEmployeeField items={maritalStatuses} type="maritalStatus" onChange={this.handleChange} />
+                                        {/*<TextField id="maritalStatus" style={styles.infoValue} value={this.props.person.maritalStatus || ''}
+                                            onChange={this.handleChange} />*/}
                                     </div>
                                 </TableRowColumn>
                                 <TableRowColumn>
@@ -245,9 +279,15 @@ class EmployeeDetail extends React.Component {
                     <ToolbarGroup />
                     <ToolbarGroup>
                         <RaisedButton label="CANCEL" style={bottomStyle} />
-                        <RaisedButton label="SAVE" secondary={true} style={bottomStyle} />
+                        <RaisedButton label="SAVE" secondary={true} style={bottomStyle} onTouchTap={this.handleSave} />
                     </ToolbarGroup>
                 </Toolbar>
+                <Snackbar
+                    open={this.props.saveSnackbar.isOpen}
+                    message="Sucessfully saved"
+                    autoHideDuration={4000}
+                    onRequestClose={this.handleRequestClose}
+                />
             </div>
         return (
             <div>
@@ -260,6 +300,7 @@ class EmployeeDetail extends React.Component {
 function mapStateToProps(state, ownProps) {
     return {
         person: state.reducePerson,
+        saveSnackbar: state.reduceSaveSnackbar
     };
 }
 

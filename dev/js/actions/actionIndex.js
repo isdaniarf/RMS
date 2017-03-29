@@ -4,7 +4,9 @@ export const CHANGE_GRADE = 'CHANGE_GRADE'
 export const FILTER_EMPLOYEES = 'FILTER_EMPLOYEES'
 export const SET_SELECTED_EMPLOYEE = 'SET_SELECTED_EMPLOYEE'
 export const SEARCH_EMPLOYEES = 'SEARCH_EMPLOYEES'
-export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE'
+export const SAVE_EMPLOYEE = 'SEARCH_EMPLOYEES'
+export const UPDATE_EMPLOYEE_UI = 'UPDATE_EMPLOYEE_UI'
+export const TOGGLE_SAVE_SNACKBAR = 'TOGGLE_SAVE_SNACKBAR'
 
 var employees = require('../data/persons.json');
 
@@ -15,10 +17,11 @@ export const showEmployeeDetail = (employee) => {
   }
 }
 
-export const changeGrade = (grade) => {
+export const changeSelectField = (fieldType, value) => {
   return {
     type: CHANGE_GRADE,
-    grade
+    fieldType,
+    value
   }
 }
 
@@ -52,15 +55,22 @@ export const searchEmployees = (filteredEmployees) => {
 
 export const saveEmployee = (employee) => {
   return {
-    type: SEARCH_EMPLOYEES,
+    type: SAVE_EMPLOYEE,
     employee
   }
 }
 
 export const updateEmployee = (employee) => {
   return {
-    type: UPDATE_EMPLOYEE,
+    type: UPDATE_EMPLOYEE_UI,
     employee
+  }
+}
+
+export const toggleSaveSnackbar = (isOpen) => {
+  return {
+    type: TOGGLE_SAVE_SNACKBAR,
+    isOpen
   }
 }
 
@@ -68,11 +78,12 @@ export const boundShowEmployeeDetail = (employee) => (dispatch) => {
   dispatch(showEmployeeDetail(employee))
 }
 
-export const boundChangeGrade = (grade) => (dispatch) => {
-  dispatch(changeGrade(grade))
+export const boundChangeSelectField = (fieldType, value) => (dispatch) => {
+  dispatch(changeSelectField(fieldType, value))
 }
 
 export const boundLoadContacts = () => (dispatch) => {
+  // console.log('triggered');
   const myHeaders = new Headers();
   const requestParam = {
     method: 'GET',
@@ -104,13 +115,46 @@ export const boundSearchEmployees = (searchKey) => (dispatch) => {
     mode: 'cors',
     cache: 'default'
   };
-  fetch('http://localhost:8080/employee/search?name='+searchKey, requestParam).then(x => {
+  fetch('http://localhost:8080/employee/search?name=' + searchKey, requestParam).then(x => {
     return x.json();
   }).then(emps => {
     dispatch(searchEmployees(emps));
   });
 }
 
+const print = (data) => () => {
+  console.log('callback function called: ', data);
+}
+
+export const boundSaveEmployee = (employee) => (dispatch) => {
+  const requestParam = {
+    method: 'POST',
+    body: JSON.stringify(employee),
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-type': 'application/json'
+    },
+    mode: 'cors',
+    cache: 'default'
+  };
+  fetch('http://localhost:8080/employee/add', requestParam).then(x => {
+    return x.text();
+  }).then(response => {
+    dispatch(toggleSaveSnackbar());
+    fetch('http://localhost:8080/employee/all').then(x => {
+      return x.json();
+    }).then(emps => {
+      dispatch(loadContacts(emps));
+    });
+    // dispatch(loadContacts());
+    // return response;
+  });
+}
+
 export const boundUpdateEmployee = (employee) => (dispatch) => {
-  dispatch(updateEmployee(employee))
+  dispatch(updateEmployee(employee));
+}
+
+export const boundToggleSaveSnackbar = (isOpen) => (dispatch) => {
+  dispatch(toggleSaveSnackbar(isOpen));
 }
