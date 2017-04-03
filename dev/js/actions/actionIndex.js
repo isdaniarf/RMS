@@ -7,6 +7,7 @@ export const SEARCH_EMPLOYEES = 'SEARCH_EMPLOYEES'
 export const SAVE_EMPLOYEE = 'SEARCH_EMPLOYEES'
 export const UPDATE_EMPLOYEE_UI = 'UPDATE_EMPLOYEE_UI'
 export const TOGGLE_SAVE_SNACKBAR = 'TOGGLE_SAVE_SNACKBAR'
+export const CHANGE_TAB = 'CHANGE_TAB'
 
 var employees = require('../data/persons.json');
 
@@ -71,6 +72,13 @@ export const toggleSaveSnackbar = (isOpen) => {
   return {
     type: TOGGLE_SAVE_SNACKBAR,
     isOpen
+  }
+}
+
+export const changeTab = (selectedTab) => {
+  return {
+    type: CHANGE_TAB,
+    selectedTab
   }
 }
 
@@ -157,4 +165,8 @@ export const boundUpdateEmployee = (employee) => (dispatch) => {
 
 export const boundToggleSaveSnackbar = (isOpen) => (dispatch) => {
   dispatch(toggleSaveSnackbar(isOpen));
+}
+
+export const boundChangeTab = (selectedTab) => (dispatch) => {
+  dispatch(changeTab(selectedTab));
 }

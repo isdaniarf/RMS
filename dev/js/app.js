@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import '../assets/css/global.css'
@@ -14,6 +15,7 @@ import 'material-design-lite/material.js';
 import 'material-design-lite/material.css';
 import ActionSettings from 'material-ui/svg-icons/action/settings'
 import ActionPowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new'
+import EmployeeDetail from './components/employeeDetail'
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import rmsApp from './reducers/reducerIndex'
@@ -120,7 +122,7 @@ class WrapperComponent extends React.Component {
                     </div>
                     <MuiThemeProvider muiTheme={secondaryTheme}>
                         <div style={rightSection}>
-                            <RightSection />
+                            <RightSection selectedTab={this.props.selectedTab} />
                         </div>
                     </MuiThemeProvider>
                 </div>
@@ -131,7 +133,17 @@ class WrapperComponent extends React.Component {
 
 ReactDOM.render(
     <Provider store={store}>
-        <WrapperComponent />
+        {/*<WrapperComponent />*/}
+        <Router>
+            <div>
+                <Route exact path="/" render={() => <WrapperComponent selectedTab={0} />} />
+                <Route path="/personalDetail" render={() => <WrapperComponent selectedTab={0} />} />
+                <Route path="/employmentHistory" render={() => <WrapperComponent selectedTab={1} />} />
+                <Route path="/gradeHistory" render={() => <WrapperComponent selectedTab={2} />} />
+                <Route path="/dependants" render={() => <WrapperComponent selectedTab={3} />} />
+                <Route path="/locationHistory" render={() => <WrapperComponent selectedTab={5} />} />
+            </div>
+        </Router>
     </Provider>,
     document.getElementById('react')
 )
