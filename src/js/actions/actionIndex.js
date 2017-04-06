@@ -1,84 +1,88 @@
+import fetch from 'isomorphic-fetch'
+
 export const SHOW_PERSON_DETAIL = 'SHOW_PERSON_DETAIL'
 export const LOAD_CONTACTS = 'LOAD_CONTACTS'
+export const LOAD_CONTACTS_SUCCESS = 'LOAD_CONTACTS_SUCCESS'
+export const LOAD_CONTACTS_FAIL = 'LOAD_CONTACTS_FAIL'
 export const CHANGE_GRADE = 'CHANGE_GRADE'
 export const FILTER_EMPLOYEES = 'FILTER_EMPLOYEES'
 export const SET_SELECTED_EMPLOYEE = 'SET_SELECTED_EMPLOYEE'
 export const SEARCH_EMPLOYEES = 'SEARCH_EMPLOYEES'
-export const SAVE_EMPLOYEE = 'SEARCH_EMPLOYEES'
+export const SEARCH_EMPLOYEES_FAIL = 'SEARCH_EMPLOYEES_FAIL'
+export const SAVE_EMPLOYEE = 'SAVE_EMPLOYEE'
+export const SAVE_EMPLOYEE_FAIL = 'SAVE_EMPLOYEE_FAIL'
 export const UPDATE_EMPLOYEE_UI = 'UPDATE_EMPLOYEE_UI'
 export const TOGGLE_SAVE_SNACKBAR = 'TOGGLE_SAVE_SNACKBAR'
 export const CHANGE_TAB = 'CHANGE_TAB'
 
-export const showEmployeeDetail = (employee) => {
-  return {
-    type: SHOW_PERSON_DETAIL,
-    employee
-  }
-}
+export const showEmployeeDetail = (employee) => ({
+  type: SHOW_PERSON_DETAIL,
+  employee
+})
 
-export const changeSelectField = (fieldType, value) => {
-  return {
-    type: CHANGE_GRADE,
-    fieldType,
-    value
-  }
-}
+export const changeSelectField = (fieldType, value) => ({
+  type: CHANGE_GRADE,
+  fieldType,
+  value
+})
 
-export const loadContacts = (employees) => {
-  return {
-    type: LOAD_CONTACTS,
-    employees
-  }
-}
+export const loadContacts = (employees) => ({
+  type: LOAD_CONTACTS,
+  employees
+})
 
-export const filterEmployees = (filterKey) => {
-  return {
-    type: FILTER_EMPLOYEES,
-    filterKey
-  }
-}
+export const loadContactsSuccess = (body) => ({
+  type: LOAD_CONTACTS_SUCCESS,
+  body
+});
 
-export const setSelectedEmployee = (employee) => {
-  return {
-    type: SET_SELECTED_EMPLOYEE,
-    employee
-  }
-}
+export const loadContactsFail = (ex) => ({
+  type: LOAD_CONTACTS_FAIL,
+  ex
+});
 
-export const searchEmployees = (filteredEmployees) => {
-  return {
-    type: SEARCH_EMPLOYEES,
-    filteredEmployees
-  }
-}
+export const filterEmployees = (filterKey) => ({
+  type: FILTER_EMPLOYEES,
+  filterKey
+})
 
-export const saveEmployee = (employee) => {
-  return {
-    type: SAVE_EMPLOYEE,
-    employee
-  }
-}
+export const setSelectedEmployee = (employee) => ({
+  type: SET_SELECTED_EMPLOYEE,
+  employee
+})
 
-export const updateEmployee = (employee) => {
-  return {
-    type: UPDATE_EMPLOYEE_UI,
-    employee
-  }
-}
+export const searchEmployees = (filteredEmployees) => ({
+  type: SEARCH_EMPLOYEES,
+  filteredEmployees
+})
 
-export const toggleSaveSnackbar = (isOpen) => {
-  return {
-    type: TOGGLE_SAVE_SNACKBAR,
-    isOpen
-  }
-}
+export const searchEmployeesFail = (ex) => ({
+  type: SEARCH_EMPLOYEES_FAIL
+})
 
-export const changeTab = (selectedTab) => {
-  return {
-    type: CHANGE_TAB,
-    selectedTab
-  }
-}
+export const saveEmployee = (employee) => ({
+  type: SAVE_EMPLOYEE,
+  employee
+})
+
+export const saveEmployeeFail = (ex) => ({
+  type: SAVE_EMPLOYEE_FAIL
+})
+
+export const updateEmployee = (employee) => ({
+  type: UPDATE_EMPLOYEE_UI,
+  employee
+})
+
+export const toggleSaveSnackbar = (isOpen) => ({
+  type: TOGGLE_SAVE_SNACKBAR,
+  isOpen
+})
+
+export const changeTab = (selectedTab) => ({
+  type: CHANGE_TAB,
+  selectedTab
+})
 
 export const boundShowEmployeeDetail = (employee) => (dispatch) => {
   dispatch(showEmployeeDetail(employee))
@@ -89,17 +93,10 @@ export const boundChangeSelectField = (fieldType, value) => (dispatch) => {
 }
 
 export const boundLoadContacts = () => (dispatch) => {
-  const requestParam = {
-    method: 'GET',
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    mode: 'cors',
-    cache: 'default'
-  };
-  fetch('http://localhost:8080/employee/all', requestParam).then(x => {
-    return x.json();
-  }).then(emps => {
-    dispatch(loadContacts(emps))
-  });
+  return fetch('http://localhost:8080/employee/all')
+    .then(x => x.json())
+    .then(emps => dispatch(loadContacts(emps)))
+    .catch(ex => dispatch(loadContactsFail(ex)))
 }
 
 export const boundFilterEmployees = (filterKey) => (dispatch) => {
@@ -111,17 +108,10 @@ export const boundSetSelectedEmployee = (employee) => (dispatch) => {
 }
 
 export const boundSearchEmployees = (searchKey) => (dispatch) => {
-  const requestParam = {
-    method: 'GET',
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    mode: 'cors',
-    cache: 'default'
-  };
-  fetch('http://localhost:8080/employee/search?name=' + searchKey, requestParam).then(x => {
-    return x.json();
-  }).then(emps => {
-    dispatch(searchEmployees(emps));
-  });
+  fetch('http://localhost:8080/employee/search?name=' + searchKey)
+    .then(x => x.json())
+    .then(emps => dispatch(searchEmployees(emps)))
+    .catch(ex => dispatch(searchEmployeesFail(ex)))
 }
 
 export const boundSaveEmployee = (employee) => (dispatch) => {
@@ -135,18 +125,18 @@ export const boundSaveEmployee = (employee) => (dispatch) => {
     mode: 'cors',
     cache: 'default'
   };
-  fetch('http://localhost:8080/employee/add', requestParam).then(x => {
-    return x.text();
-  }).then(response => {
-    dispatch(toggleSaveSnackbar());
-    fetch('http://localhost:8080/employee/all').then(x => {
-      return x.json();
-    }).then(emps => {
-      dispatch(loadContacts(emps));
-    });
-    // dispatch(loadContacts());
-    // return response;
-  });
+
+  return fetch('http://localhost:8080/employee/add', requestParam)
+    .then(x => x.text())
+    .then(response => {
+      dispatch(toggleSaveSnackbar());
+      // dispatch(loadContacts());
+      return fetch('http://localhost:8080/employee/all')
+        .then(x => x.json())
+        .then(emps => {
+          dispatch(loadContacts(emps));
+        });
+    }).catch(ex => dispatch(saveEmployeeFail(ex)));
 }
 
 export const boundUpdateEmployee = (employee) => (dispatch) => {

@@ -2,30 +2,57 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import nock from 'nock'
 
+import reducers from '../js/reducers/reducerIndex'
 import * as actions from '../js/actions/actionIndex'
 import * as types from '../js/actions/actionTypes'
 
-const middlewares = [ thunk ]
+const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
+
+const employee = [{ "firstName": "Eric"}]
+
 
 describe('async actions', () => {
   afterEach(() => {
     nock.cleanAll()
   })
 
-  it('creates FETCH_TODOS_SUCCESS when fetching todos has been done', () => {
+  it('creates LOAD_CONTACTS when fetching employees has been done', () => {
     nock('http://localhost:8080')
-      .get('/employee/all/')
-      .reply(200)
+      .get('/employee/all')
+      .reply(200, employee)
 
     const expectedActions = [
-      { type: types.LOAD_CONTACTS }
+      { type: types.LOAD_CONTACTS, employees: employee }
     ]
+
     const store = mockStore({ employees: [] })
 
     return store.dispatch(actions.boundLoadContacts())
-      .then(() => { // return of async actions
-        expect(store.getActions()).toEqual(expectedActions)
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      })
+  })
+
+  it('creates SAVE_EMPLOYEE when saving employees has been done', () => {
+    nock('http://localhost:8080')
+      .get('/employee/all')
+      .reply(200, employee)
+    
+    nock('http://localhost:8080')
+      .post('/employee/add', employee)
+      .reply(200)
+
+    const expectedActions = [
+      { type: types.TOGGLE_SAVE_SNACKBAR, isOpen: true },
+      { type: types.LOAD_CONTACTS, employees: employee }
+    ]
+
+    const store = mockStore({ isOpen: true, employees: [] })
+
+    return store.dispatch(actions.boundSaveEmployee(employee))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
       })
   })
 })

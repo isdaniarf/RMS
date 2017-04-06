@@ -99,7 +99,7 @@ class EmployeeList extends React.Component {
   }
 
   componentWillMount() {
-    // this.props.actions.boundLoadContacts();
+    this.props.actions.boundLoadContacts();
   }
 
   handleChange(value) {
