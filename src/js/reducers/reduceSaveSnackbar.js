@@ -9,7 +9,7 @@ const reducePerson = (state = initialState, action) => {
         case ActionIndex.TOGGLE_SAVE_SNACKBAR:
         // console.log(action.isOpen);
             return Object.assign({}, state, {
-                isOpen: action.isOpen === undefined ? !state.isOpen : action.isOpen
+                isOpen: action.isOpen
             });
         default:
             return state;

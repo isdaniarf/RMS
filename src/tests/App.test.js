@@ -11,19 +11,18 @@ const mockStore = configureMockStore(middlewares)
 
 const employee = [{ "firstName": "Eric"}]
 
-
-describe('async actions', () => {
+describe('fetches employees', () => {
   afterEach(() => {
     nock.cleanAll()
   })
 
-  it('creates LOAD_CONTACTS when fetching employees has been done', () => {
+  test('creates LOAD_EMPLOYEES when fetching employees has been done', () => {
     nock('http://localhost:8080')
       .get('/employee/all')
       .reply(200, employee)
 
     const expectedActions = [
-      { type: types.LOAD_CONTACTS, employees: employee }
+      { type: types.LOAD_EMPLOYEES, employees: employee }
     ]
 
     const store = mockStore({ employees: [] })
@@ -45,7 +44,7 @@ describe('async actions', () => {
 
     const expectedActions = [
       { type: types.TOGGLE_SAVE_SNACKBAR, isOpen: true },
-      { type: types.LOAD_CONTACTS, employees: employee }
+      { type: types.LOAD_EMPLOYEES, employees: employee }
     ]
 
     const store = mockStore({ isOpen: true, employees: [] })

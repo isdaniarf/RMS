@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-fetch'
 
 export const SHOW_PERSON_DETAIL = 'SHOW_PERSON_DETAIL'
-export const LOAD_CONTACTS = 'LOAD_CONTACTS'
-export const LOAD_CONTACTS_SUCCESS = 'LOAD_CONTACTS_SUCCESS'
-export const LOAD_CONTACTS_FAIL = 'LOAD_CONTACTS_FAIL'
+export const LOAD_EMPLOYEES = 'LOAD_EMPLOYEES'
+export const LOAD_EMPLOYEES_SUCCESS = 'LOAD_EMPLOYEES_SUCCESS'
+export const LOAD_EMPLOYEES_FAIL = 'LOAD_EMPLOYEES_FAIL'
 export const CHANGE_GRADE = 'CHANGE_GRADE'
 export const FILTER_EMPLOYEES = 'FILTER_EMPLOYEES'
 export const SET_SELECTED_EMPLOYEE = 'SET_SELECTED_EMPLOYEE'
@@ -27,17 +27,17 @@ export const changeSelectField = (fieldType, value) => ({
 })
 
 export const loadContacts = (employees) => ({
-  type: LOAD_CONTACTS,
+  type: LOAD_EMPLOYEES,
   employees
 })
 
 export const loadContactsSuccess = (body) => ({
-  type: LOAD_CONTACTS_SUCCESS,
+  type: LOAD_EMPLOYEES_SUCCESS,
   body
 });
 
 export const loadContactsFail = (ex) => ({
-  type: LOAD_CONTACTS_FAIL,
+  type: LOAD_EMPLOYEES_FAIL,
   ex
 });
 
@@ -46,9 +46,9 @@ export const filterEmployees = (filterKey) => ({
   filterKey
 })
 
-export const setSelectedEmployee = (employee) => ({
+export const setSelectedEmployee = (index) => ({
   type: SET_SELECTED_EMPLOYEE,
-  employee
+  index
 })
 
 export const searchEmployees = (filteredEmployees) => ({
@@ -103,8 +103,8 @@ export const boundFilterEmployees = (filterKey) => (dispatch) => {
   dispatch(filterEmployees(filterKey))
 }
 
-export const boundSetSelectedEmployee = (employee) => (dispatch) => {
-  dispatch(setSelectedEmployee(employee))
+export const boundSetSelectedEmployee = (index) => (dispatch) => {
+  dispatch(setSelectedEmployee(index))
 }
 
 export const boundSearchEmployees = (searchKey) => (dispatch) => {
@@ -129,7 +129,7 @@ export const boundSaveEmployee = (employee) => (dispatch) => {
   return fetch('http://localhost:8080/employee/add', requestParam)
     .then(x => x.text())
     .then(response => {
-      dispatch(toggleSaveSnackbar());
+      dispatch(toggleSaveSnackbar(true));
       // dispatch(loadContacts());
       return fetch('http://localhost:8080/employee/all')
         .then(x => x.json())

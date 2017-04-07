@@ -1,13 +1,14 @@
 import * as ActionIndex from '../actions/actionIndex'
 
 const defaultState = {
+    selected: null,
     initial: [],
     filtered: []
 }
 
 const reduceEmployees = (state = defaultState, action) => {
     switch (action.type) {
-        case ActionIndex.LOAD_CONTACTS:
+        case ActionIndex.LOAD_EMPLOYEES:
             return Object.assign({}, state, {
                 initial: action.employees,
                 filtered: action.employees
@@ -24,11 +25,9 @@ const reduceEmployees = (state = defaultState, action) => {
             });
         case ActionIndex.SET_SELECTED_EMPLOYEE:
             // let newFiltered = JSON.parse(JSON.stringify(state.filtered));
-            let newFiltered = [...state.filtered]
-            newFiltered.forEach(a => a.selected = a.id === action.employee.id ? true : a.selected = false)
             return Object.assign({}, state, {
-                filtered: newFiltered
-            });
+                selected: action.index
+            })
         default:
             return state
     }

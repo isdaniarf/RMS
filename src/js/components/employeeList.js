@@ -102,10 +102,10 @@ class EmployeeList extends React.Component {
     this.props.actions.boundLoadContacts();
   }
 
-  handleChange(value) {
-    // console.log(value)
+  handleChange(value, index) {
+    // console.log(this.props.employees)
     this.props.actions.boundShowEmployeeDetail(value);
-    this.props.actions.boundSetSelectedEmployee(value);
+    this.props.actions.boundSetSelectedEmployee(index);
   }
 
   render() {
@@ -115,15 +115,15 @@ class EmployeeList extends React.Component {
         <MuiThemeProvider muiTheme={muiTheme}>
           <div>
             <List style={listStyle}>
-              {this.props.employees.filtered.map((person) => (
+              {this.props.employees.filtered.map((person, index) => (
                 <ListItem
                   primaryText={<PersonName person={person} />}
                   secondaryText={<EmployeeDetail person={person} />}
                   secondaryTextLines={2}
                   leftAvatar={<Avatar src={person.avatar} size={52} />}
                   rightIcon={<RightItemIcon />}
-                  onTouchTap={() => this.handleChange(person)}
-                  style={person.selected ? listItemStyleSelected : listItemStyle}
+                  onTouchTap={() => this.handleChange(person, index)}
+                  style={this.props.employees.selected === index ? listItemStyleSelected : listItemStyle}
                   key={person.firstName}
                 />
               ))}
