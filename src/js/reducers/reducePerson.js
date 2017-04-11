@@ -1,6 +1,26 @@
 import * as ActionIndex from '../actions/actionIndex'
 
-const reducePerson = (state = {}, action) => {
+const defaultState = {
+        id: '',
+        grade: '',
+        city: '',
+        mobileNo: '',
+        avatar: '',
+        firstName: '',
+        lastName: '',
+        division: '',
+        subdivision: '',
+        dob: null,
+        doj: null,
+        nationality: '',
+        email: '',
+        maritalStatus: '',
+        employmentStatus: '',
+        gender: '',
+        suspendDate: null
+    }
+
+const reducePerson = (state = defaultState, action) => {
     switch (action.type) {
         case ActionIndex.SHOW_PERSON_DETAIL:
             // console.log(Object.assign({}, state, action.employee));

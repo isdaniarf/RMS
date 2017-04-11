@@ -14,6 +14,7 @@ export const SAVE_EMPLOYEE_FAIL = 'SAVE_EMPLOYEE_FAIL'
 export const UPDATE_EMPLOYEE_UI = 'UPDATE_EMPLOYEE_UI'
 export const TOGGLE_SAVE_SNACKBAR = 'TOGGLE_SAVE_SNACKBAR'
 export const CHANGE_TAB = 'CHANGE_TAB'
+export const SHOW_ADD_MODAL = 'SHOW_ADD_MODAL'
 
 export const showEmployeeDetail = (employee) => ({
   type: SHOW_PERSON_DETAIL,
@@ -84,6 +85,11 @@ export const changeTab = (selectedTab) => ({
   selectedTab
 })
 
+export const showAddModal = (isModalShown) => ({
+  type: SHOW_ADD_MODAL,
+  isModalShown
+})
+
 export const boundShowEmployeeDetail = (employee) => (dispatch) => {
   dispatch(showEmployeeDetail(employee))
 }
@@ -126,6 +132,7 @@ export const boundSaveEmployee = (employee) => (dispatch) => {
     cache: 'default'
   };
 
+  console.log(JSON.stringify(employee));
   return fetch('http://localhost:8080/employee/add', requestParam)
     .then(x => x.text())
     .then(response => {
@@ -149,4 +156,8 @@ export const boundToggleSaveSnackbar = (isOpen) => (dispatch) => {
 
 export const boundChangeTab = (selectedTab) => (dispatch) => {
   dispatch(changeTab(selectedTab));
+}
+
+export const boundShowAddModal = (isModalShown) => (dispatch) => {
+  dispatch(showAddModal(isModalShown));
 }

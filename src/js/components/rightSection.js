@@ -15,13 +15,17 @@ import EmploymentHistory from './employmentHistory'
 import LocationHistory from './locationHistory'
 import {  NavLink } from 'react-router-dom'
 
+import { connect } from 'react-redux'
+
+import * as Util from '../util/util'
+
 const gradeHistoryStyle = {
   margin: 40
 }
 
 class RightSection extends Component {
   render() {
-    // console.log(this.props.selectedTab);
+    // const employeeDetail = Util.isObjectEmpty(this.props.person) ? <div /> : <EmployeeDetail />;
     return (
       <Tabs initialSelectedIndex={this.props.selectedTab}>
         <Tab
@@ -86,4 +90,10 @@ class RightSection extends Component {
   }
 }
 
-export default RightSection;
+function mapStateToProps(state, ownProps) {
+    return {
+        person: state.reducePerson,
+    };
+}
+
+export default connect(mapStateToProps)(RightSection);

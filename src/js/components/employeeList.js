@@ -10,6 +10,7 @@ import {muiTheme} from '../app'
 import SearchBar from './searchBar'
 import HardwareKeyboardArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import ToggleRadioButtonChecked from 'material-ui/svg-icons/toggle/radio-button-checked'
+import AddEmployeeModal from './addEmployeeModal'
 
 import { connect } from 'react-redux'
 import * as actionIndex from '../actions/actionIndex'
@@ -96,10 +97,16 @@ class EmployeeList extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.handleAddButton = this.handleAddButton.bind(this);
   }
 
   componentWillMount() {
     this.props.actions.boundLoadContacts();
+  }
+
+  handleAddButton() {
+    // console.log(this.props.actions.boundShowAddModal);
+    this.props.actions.boundShowAddModal(true);
   }
 
   handleChange(value, index) {
@@ -128,11 +135,12 @@ class EmployeeList extends React.Component {
                 />
               ))}
             </List>
-            <FloatingActionButton secondary={true} mini={false} style={addEmployeeButton} zDepth={4}>
+            <FloatingActionButton onTouchTap={this.handleAddButton} secondary={true} mini={false} style={addEmployeeButton} zDepth={4}>
               <ContentAdd style={styles.large} />
             </FloatingActionButton>
           </div>
         </MuiThemeProvider>
+        <AddEmployeeModal isOpen={this.props.isModalShown} />
       </Paper>
     )
   }
@@ -141,7 +149,8 @@ class EmployeeList extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     person: state.reducePerson,
-    employees: state.reduceEmployees
+    employees: state.reduceEmployees,
+    isModalShown: state.reduceAddModal.isModalShown
   };
 }
 

@@ -16,7 +16,7 @@ const reduceEmployees = (state = defaultState, action) => {
         case ActionIndex.FILTER_EMPLOYEES:
             // console.log(state)
             return Object.assign({}, state, {
-                filtered: state.initial.filter(a => (a.firstName+' '+a.lastName).toLowerCase().includes(action.filterKey))
+                filtered: state.initial.filter(a => (a.firstName + ' ' + a.lastName).toLowerCase().includes(action.filterKey))
             });
         case ActionIndex.SEARCH_EMPLOYEES:
             // console.log(Object.assign({}, state, [...action.filteredEmployees]));

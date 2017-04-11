@@ -82,9 +82,6 @@ const tableStyle = {
 class EmployeeDetail extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            snackbarOpen: false,
-        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.handleRequestClose = this.handleRequestClose.bind(this);
@@ -112,12 +109,12 @@ class EmployeeDetail extends React.Component {
     };
 
     render() {
+        // console.log(this.props.person.dob)
         let grades = ['SE-JP', 'SE-PG', 'SE-AP', 'SE-AN', 'MJF-PM', 'CON-CON', 'ADM-ADM1', 'TR-TR2'];
         let genders = ['Male', 'Female'];
         let employmentStatuses = ['Permanent', 'Contract'];
         let maritalStatuses = ['Single', 'Married'];
-        let content = Util.isObjectEmpty(this.props.person) ?
-            <div /> :
+        let content = 
             <div style={container}>
                 <div style={leftSection}>
                     <Table
@@ -196,7 +193,7 @@ class EmployeeDetail extends React.Component {
                                 <TableRowColumn>
                                     <div style={styles.grid}>
                                         <div style={styles.infoHeader}>Hired Date</div>
-                                        <DatePicker hintText="doj" value={new Date(this.props.person.doj)} mode="landscape"
+                                        <DatePicker id="doj" hintText="doj" value={new Date(this.props.person.doj)} mode="landscape"
                                             onChange={(e, v) => this.handleChange(e, v, "doj")} />
                                     </div>
                                 </TableRowColumn>
