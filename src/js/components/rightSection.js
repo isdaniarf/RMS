@@ -8,7 +8,6 @@ import NotificationWC from 'material-ui/svg-icons/notification/wc';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import MapsPlace from 'material-ui/svg-icons/maps/place';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { employeeDetailTheme } from '../app'
 import GradeHistory from './gradeHistory'
 import FamilyMembers from './familyMembers'
 import EmploymentHistory from './employmentHistory'
@@ -16,8 +15,6 @@ import LocationHistory from './locationHistory'
 import {  NavLink } from 'react-router-dom'
 
 import { connect } from 'react-redux'
-
-import * as Util from '../util/util'
 
 const gradeHistoryStyle = {
   margin: 40
@@ -33,8 +30,8 @@ class RightSection extends Component {
           containerElement={<NavLink activeClassName="active" to="/personalDetail" />}
         >
           <div>
-            <MuiThemeProvider muiTheme={employeeDetailTheme}>
-              <EmployeeDetail />
+            <MuiThemeProvider>
+              <EmployeeDetail addMode={false}/>
             </MuiThemeProvider>
           </div>
         </Tab>
@@ -43,7 +40,7 @@ class RightSection extends Component {
           containerElement={<NavLink activeClassName="active" to="/employmentHistory" />}
         >
           <div style={gradeHistoryStyle}>
-            <MuiThemeProvider muiTheme={employeeDetailTheme}>
+            <MuiThemeProvider>
               <EmploymentHistory />
             </MuiThemeProvider>
           </div>
@@ -53,7 +50,7 @@ class RightSection extends Component {
           containerElement={<NavLink activeClassName="active" to="/gradeHistory" />}
         >
           <div style={gradeHistoryStyle}>
-            <MuiThemeProvider muiTheme={employeeDetailTheme}>
+            <MuiThemeProvider>
               <GradeHistory />
             </MuiThemeProvider>
           </div>
@@ -63,7 +60,7 @@ class RightSection extends Component {
           containerElement={<NavLink activeClassName="active" to="/dependants" />}
         >
           <div style={gradeHistoryStyle}>
-            <MuiThemeProvider muiTheme={employeeDetailTheme}>
+            <MuiThemeProvider>
               <FamilyMembers />
             </MuiThemeProvider>
           </div>
@@ -80,7 +77,7 @@ class RightSection extends Component {
           containerElement={<NavLink activeClassName="active" to="/locationHistory" />}
         >
           <div style={gradeHistoryStyle}>
-            <MuiThemeProvider muiTheme={employeeDetailTheme}>
+            <MuiThemeProvider>
               <LocationHistory />
             </MuiThemeProvider>
           </div>

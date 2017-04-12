@@ -1,20 +1,28 @@
 import React from 'react';
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
-import { grey800, grey500, indigo100, indigo800 } from 'material-ui/styles/colors';
+import { grey800, grey500, indigo100, indigo800, white } from 'material-ui/styles/colors';
 import Paper from 'material-ui/Paper';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {muiTheme} from '../app'
 import SearchBar from './searchBar'
 import HardwareKeyboardArrowRight from 'material-ui/svg-icons/hardware/keyboard-arrow-right'
 import ToggleRadioButtonChecked from 'material-ui/svg-icons/toggle/radio-button-checked'
 import AddEmployeeModal from './addEmployeeModal'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import { connect } from 'react-redux'
 import * as actionIndex from '../actions/actionIndex'
 import { bindActionCreators } from 'redux'
+
+const employeeListTheme = getMuiTheme({
+    palette: {
+        primary1Color: white,
+        textColor: grey800,
+        alternateTextColor: white,
+    }
+});
 
 const paperStyle = {
   width: '100%',
@@ -69,12 +77,6 @@ const rightItemIconStyle = {
   position: 'abosulute',
   float: 'right',
   paddingTop: 18,
-  // marginLeft: 20,
-  // paddingLeft: 20,
-  // display: 'table-cell',
-  // verticalAlign: 'middle'
-  // marginRight: 0,
-  // marginTop: 10
 }
 
 const PersonName = (props) => (
@@ -119,7 +121,7 @@ class EmployeeList extends React.Component {
     return (
       <Paper style={paperStyle} zDepth={0} rounded={false} >
         <SearchBar />
-        <MuiThemeProvider muiTheme={muiTheme}>
+        <MuiThemeProvider muiTheme={employeeListTheme}>
           <div>
             <List style={listStyle}>
               {this.props.employees.filtered.map((person, index) => (
@@ -139,7 +141,7 @@ class EmployeeList extends React.Component {
               <ContentAdd style={styles.large} />
             </FloatingActionButton>
           </div>
-        </MuiThemeProvider>
+        </MuiThemeProvider> 
         <AddEmployeeModal isOpen={this.props.isModalShown} />
       </Paper>
     )

@@ -2,25 +2,38 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import EmployeeDetail from './employeeDetail'
 import FlatButton from 'material-ui/FlatButton';
-import {
-  Step,
-  Stepper,
-  StepButton,
-} from 'material-ui/Stepper';
+import { Step, Stepper, StepButton } from 'material-ui/Stepper';
 // import RaisedButton from 'material-ui/RaisedButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { black, white, indigo500, indigo300 } from 'material-ui/styles/colors';
+import Paper from 'material-ui/Paper'
 
 import { connect } from 'react-redux'
 import * as actionIndex from '../actions/actionIndex'
 import { bindActionCreators } from 'redux'
 
 const contentStyle = {
-    width: '800px',
-    height: '80%'
+    width: '80%',
+    maxWidth: 'none',
+    // height: '100%',
+    overflow: 'scroll'
 }
+
+const addModalTheme = getMuiTheme({
+    palette: {
+        primary1Color: indigo300,
+        textColor: black,
+        disabledColor: black
+    }
+});
 
 class AddEmployeeModal extends Component {
     constructor() {
         super();
+        this.state = {
+            stepIndex: 0
+        }
         this.handleClose = this.handleClose.bind(this);
     }
 
@@ -34,6 +47,18 @@ class AddEmployeeModal extends Component {
     // };
 
     render() {
+        const { stepIndex } = this.state;
+        const fitWidthStyle = {
+            width: '100%',
+        };
+        const paperStyle = {
+            height: 2000,
+            width: 100,
+            margin: 20,
+            textAlign: 'center',
+            display: 'inline-block',
+            backgroundColor: 'black',
+        }
         const actions = [
             <FlatButton
                 label="Cancel"
@@ -49,15 +74,27 @@ class AddEmployeeModal extends Component {
         ];
 
         return (
-            <Dialog
-                title="Dialog With Actions"
-                contentStyle={contentStyle}
-                actions={actions}
-                modal={true}
-                open={this.props.isOpen}
-            >
-                <EmployeeDetail />
-            </Dialog>
+            <MuiThemeProvider muiTheme={addModalTheme}>
+
+                <Dialog
+                    title="Create New Employee"
+                    contentStyle={contentStyle}
+                    actions={actions}
+                    modal={true}
+                    autoScrollBodyContent={true}
+                    open={this.props.isOpen}
+                >
+                    <Stepper linear={false} activeStep={stepIndex}>
+                        <Step style={fitWidthStyle}>
+                            <EmployeeDetail addMode={true}/>
+                        </Step>
+                        <Step style={fitWidthStyle}>
+                            
+                        </Step>
+                    </Stepper>
+                </Dialog>
+
+            </MuiThemeProvider>
         )
     }
 }

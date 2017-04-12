@@ -132,7 +132,7 @@ export const boundSaveEmployee = (employee) => (dispatch) => {
     cache: 'default'
   };
 
-  console.log(JSON.stringify(employee));
+  // console.log(JSON.stringify(employee));
   return fetch('http://localhost:8080/employee/add', requestParam)
     .then(x => x.text())
     .then(response => {
@@ -141,6 +141,7 @@ export const boundSaveEmployee = (employee) => (dispatch) => {
       return fetch('http://localhost:8080/employee/all')
         .then(x => x.json())
         .then(emps => {
+          // dispatch(showEmployeeDetail(employee))
           dispatch(loadContacts(emps));
         });
     }).catch(ex => dispatch(saveEmployeeFail(ex)));
