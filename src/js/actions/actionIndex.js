@@ -113,8 +113,9 @@ export const boundSetSelectedEmployee = (index) => (dispatch) => {
   dispatch(setSelectedEmployee(index))
 }
 
-export const boundSearchEmployees = (searchKey) => (dispatch) => {
-  fetch('http://localhost:8080/employee/search?name=' + searchKey)
+export const boundSearchEmployees = (searchKey) => (dispatch, getState) => {
+  // if(getIsFetching(getState))
+  return fetch('http://localhost:8080/employee/search?name=' + searchKey)
     .then(x => x.json())
     .then(emps => dispatch(searchEmployees(emps)))
     .catch(ex => dispatch(searchEmployeesFail(ex)))
@@ -137,11 +138,9 @@ export const boundSaveEmployee = (employee) => (dispatch) => {
     .then(x => x.text())
     .then(response => {
       dispatch(toggleSaveSnackbar(true));
-      // dispatch(loadContacts());
       return fetch('http://localhost:8080/employee/all')
         .then(x => x.json())
         .then(emps => {
-          // dispatch(showEmployeeDetail(employee))
           dispatch(loadContacts(emps));
         });
     }).catch(ex => dispatch(saveEmployeeFail(ex)));

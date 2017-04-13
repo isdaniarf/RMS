@@ -16,7 +16,7 @@ import { bindActionCreators } from 'redux'
 const contentStyle = {
     width: '80%',
     maxWidth: 'none',
-    // height: '100%',
+    height: '80%',
     overflow: 'scroll'
 }
 
@@ -51,14 +51,6 @@ class AddEmployeeModal extends Component {
         const fitWidthStyle = {
             width: '100%',
         };
-        const paperStyle = {
-            height: 2000,
-            width: 100,
-            margin: 20,
-            textAlign: 'center',
-            display: 'inline-block',
-            backgroundColor: 'black',
-        }
         const actions = [
             <FlatButton
                 label="Cancel"
@@ -77,7 +69,7 @@ class AddEmployeeModal extends Component {
             <MuiThemeProvider muiTheme={addModalTheme}>
 
                 <Dialog
-                    title="Create New Employee"
+                    title=""
                     contentStyle={contentStyle}
                     actions={actions}
                     modal={true}
@@ -86,10 +78,13 @@ class AddEmployeeModal extends Component {
                 >
                     <Stepper linear={false} activeStep={stepIndex}>
                         <Step style={fitWidthStyle}>
-                            <EmployeeDetail addMode={true}/>
+                            <StepButton onClick={() => this.setState({ stepIndex: 0 })}>
+                                Create New Employee
+                            </StepButton>
+                            <EmployeeDetail addMode={true} />
                         </Step>
                         <Step style={fitWidthStyle}>
-                            
+
                         </Step>
                     </Stepper>
                 </Dialog>

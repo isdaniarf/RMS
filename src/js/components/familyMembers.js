@@ -3,9 +3,15 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import ActionDelete from 'material-ui/svg-icons/action/delete'
 import ToggleCheckBox from 'material-ui/svg-icons/toggle/check-box'
 import ImageEdit from 'material-ui/svg-icons/image/edit'
+import IconButton from 'material-ui/IconButton'
 
-export default class FamilyMembers extends Component {
+import { connect } from 'react-redux'
+import * as actionIndex from '../actions/actionIndex'
+import { bindActionCreators } from 'redux'
+
+class FamilyMembers extends Component {
     render() {
+        const dependants = this.props.dependants || [];
         return (
             <Table
                 selectable={false}
@@ -28,35 +34,33 @@ export default class FamilyMembers extends Component {
                     </TableRow>
                 </TableHeader>
                 <TableBody displayRowCheckbox={false}>
-                    <TableRow>
-                        <TableRowColumn>Melissa Lingard</TableRowColumn>
-                        <TableRowColumn>Female</TableRowColumn>
-                        <TableRowColumn>Wife</TableRowColumn>
-                        <TableRowColumn>Jun 1, 1981</TableRowColumn>
-                        <TableRowColumn><ToggleCheckBox /></TableRowColumn>
-                        <TableRowColumn><ImageEdit /></TableRowColumn>
-                        <TableRowColumn><ActionDelete /></TableRowColumn>
-                    </TableRow>
-                    <TableRow>
-                        <TableRowColumn>Daniel Hoffman</TableRowColumn>
-                        <TableRowColumn>Male</TableRowColumn>
-                        <TableRowColumn>Son</TableRowColumn>
-                        <TableRowColumn>Jun 13, 2010</TableRowColumn>
-                        <TableRowColumn><ToggleCheckBox /></TableRowColumn>
-                        <TableRowColumn><ImageEdit /></TableRowColumn>
-                        <TableRowColumn><ActionDelete /></TableRowColumn>
-                    </TableRow>
-                    <TableRow>
-                        <TableRowColumn>Taylor Hoffman</TableRowColumn>
-                        <TableRowColumn>Female</TableRowColumn>
-                        <TableRowColumn>Daughter</TableRowColumn>
-                        <TableRowColumn>Jun 13, 2012</TableRowColumn>
-                        <TableRowColumn><ToggleCheckBox /></TableRowColumn>
-                        <TableRowColumn><ImageEdit /></TableRowColumn>
-                        <TableRowColumn><ActionDelete /></TableRowColumn>
-                    </TableRow>
+                    {dependants.map(dependant => (
+                        <TableRow key={dependant.firstName+' '+dependant.lastName}>
+                            <TableRowColumn>{dependant.firstName+' '+dependant.lastName}</TableRowColumn>
+                            <TableRowColumn>{dependant.gender}</TableRowColumn>
+                            <TableRowColumn>{dependant.dob}</TableRowColumn>
+                            <TableRowColumn>{dependant.dependantType}</TableRowColumn>
+                            <TableRowColumn><ToggleCheckBox /></TableRowColumn>
+                            <TableRowColumn><IconButton tooltip="Edit"><ImageEdit /></IconButton></TableRowColumn>
+                            <TableRowColumn><IconButton tooltip="Delete"><ActionDelete /></IconButton></TableRowColumn>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
         );
     }
 }
+
+function mapStateToProps(state, ownProps) {
+    return {
+        dependants: state.reducePerson.dependants
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actionIndex, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FamilyMembers);
