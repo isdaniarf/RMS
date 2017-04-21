@@ -1,15 +1,15 @@
 import fetch from 'isomorphic-fetch'
+import { createAsyncAction } from '../util/util'
 
 export const SHOW_PERSON_DETAIL = 'SHOW_PERSON_DETAIL'
-export const LOAD_EMPLOYEES = 'LOAD_EMPLOYEES'
-export const LOAD_EMPLOYEES_SUCCESS = 'LOAD_EMPLOYEES_SUCCESS'
-export const LOAD_EMPLOYEES_FAIL = 'LOAD_EMPLOYEES_FAIL'
+export const loadEmployees = createAsyncAction('LOAD_EMPLOYEE')
 export const CHANGE_GRADE = 'CHANGE_GRADE'
 export const FILTER_EMPLOYEES = 'FILTER_EMPLOYEES'
 export const SET_SELECTED_EMPLOYEE = 'SET_SELECTED_EMPLOYEE'
 export const SEARCH_EMPLOYEES = 'SEARCH_EMPLOYEES'
 export const SEARCH_EMPLOYEES_FAIL = 'SEARCH_EMPLOYEES_FAIL'
 export const SAVE_EMPLOYEE = 'SAVE_EMPLOYEE'
+export const SAVE_EMPLOYEE_SUCCESS = 'SAVE_EMPLOYEE_SUCCESS'
 export const SAVE_EMPLOYEE_FAIL = 'SAVE_EMPLOYEE_FAIL'
 export const UPDATE_EMPLOYEE_UI = 'UPDATE_EMPLOYEE_UI'
 export const TOGGLE_SAVE_SNACKBAR = 'TOGGLE_SAVE_SNACKBAR'
@@ -27,18 +27,17 @@ export const changeSelectField = (fieldType, value) => ({
   value
 })
 
-export const loadContacts = (employees) => ({
-  type: LOAD_EMPLOYEES,
-  employees
+export const loadContacts = () => ({
+  type: loadEmployees.start,
 })
 
-export const loadContactsSuccess = (body) => ({
-  type: LOAD_EMPLOYEES_SUCCESS,
-  body
+export const loadContactsSuccess = (employees) => ({
+  type: loadEmployees.success,
+  employees
 });
 
 export const loadContactsFail = (ex) => ({
-  type: LOAD_EMPLOYEES_FAIL,
+  type: loadEmployees.fail, 
   ex
 });
 
@@ -99,9 +98,10 @@ export const boundChangeSelectField = (fieldType, value) => (dispatch) => {
 }
 
 export const boundLoadContacts = () => (dispatch) => {
+  dispatch(loadContacts());
   return fetch('http://localhost:8080/employee/all')
     .then(x => x.json())
-    .then(emps => dispatch(loadContacts(emps)))
+    .then(emps => dispatch(loadContactsSuccess(emps)))
     .catch(ex => dispatch(loadContactsFail(ex)))
 }
 

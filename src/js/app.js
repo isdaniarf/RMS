@@ -5,12 +5,12 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import WrapperComponent from './components/topComponent'
 
 import { createStore, applyMiddleware, compose } from 'redux';
-import rmsApp from './reducers/reducerIndex'
+import reducerIndex from './reducers/reducerIndex'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(rmsApp, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(reducerIndex, composeEnhancers(applyMiddleware(thunk)));
 
 const App = () => (
     <Provider store={store}>

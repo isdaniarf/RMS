@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import EmployeeDetail from './employeeDetail'
+import GradeHistory from './gradeHistory'
+import FamilyMembers from './familyMembers'
+import EmploymentHistory from './employmentHistory'
+import LocationHistory from './locationHistory'
 import FlatButton from 'material-ui/FlatButton';
 import { Step, Stepper, StepButton } from 'material-ui/Stepper';
 // import RaisedButton from 'material-ui/RaisedButton';
@@ -17,7 +21,7 @@ const contentStyle = {
     width: '80%',
     maxWidth: 'none',
     height: '80%',
-    overflow: 'scroll'
+    overflow: 'hidden'
 }
 
 const addModalTheme = getMuiTheme({
@@ -38,13 +42,25 @@ class AddEmployeeModal extends Component {
     }
 
     handleClose() {
-        // console.log(this.props.actions.boundShowAddModal);
         this.props.actions.boundShowAddModal(false);
     }
 
-    // handleClose = () => {
-    //     this.props.actions.boundShowAddModal(false);
-    // };
+    getStepContent(stepIndex) {
+        switch (stepIndex) {
+            case 0:
+                return <EmployeeDetail addMode={true} />;
+            case 1:
+                return <EmploymentHistory />;
+            case 2:
+                return <GradeHistory />;
+            case 3:
+                return <FamilyMembers />;
+            case 4:
+                return <LocationHistory />;
+            default:
+                return <EmployeeDetail addMode={true} />;
+        }
+    }
 
     render() {
         const { stepIndex } = this.state;
@@ -77,16 +93,34 @@ class AddEmployeeModal extends Component {
                     open={this.props.isOpen}
                 >
                     <Stepper linear={false} activeStep={stepIndex}>
-                        <Step style={fitWidthStyle}>
+                        <Step>
                             <StepButton onClick={() => this.setState({ stepIndex: 0 })}>
                                 Create New Employee
                             </StepButton>
-                            <EmployeeDetail addMode={true} />
                         </Step>
-                        <Step style={fitWidthStyle}>
-
+                        <Step>
+                            <StepButton onClick={() => this.setState({ stepIndex: 1 })}>
+                                Add Job History
+                            </StepButton>
+                        </Step>
+                        <Step>
+                            <StepButton onClick={() => this.setState({ stepIndex: 2 })}>
+                                Add Grade History
+                            </StepButton>
+                        </Step>
+                        <Step>
+                            <StepButton onClick={() => this.setState({ stepIndex: 3 })}>
+                                Add Dependants
+                            </StepButton>
+                        </Step>
+                        <Step>
+                            <StepButton onClick={() => this.setState({ stepIndex: 4 })}>
+                                Add Location History
+                            </StepButton>
                         </Step>
                     </Stepper>
+                    {this.getStepContent(stepIndex)}
+                    
                 </Dialog>
 
             </MuiThemeProvider>

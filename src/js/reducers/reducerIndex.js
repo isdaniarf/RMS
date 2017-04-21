@@ -5,7 +5,7 @@ import reduceSaveSnackbar from './reduceSaveSnackbar'
 import reduceDependant from './reduceDependant'
 import reduceAddModal from './reduceAddModal'
 
-const rmsApp = combineReducers({
+const reducerIndex = combineReducers({
   reducePerson,
   reduceEmployees,
   reduceSaveSnackbar,
@@ -13,4 +13,4 @@ const rmsApp = combineReducers({
   reduceAddModal
 })
 
-export default rmsApp
+export default reducerIndex

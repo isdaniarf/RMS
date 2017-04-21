@@ -51,7 +51,7 @@ const styles = {
 };
 
 const container = {
-    minWidth: 1000,
+    // minWidth: 1000,
 }
 
 const leftSection = {
