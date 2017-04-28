@@ -10,8 +10,7 @@ import { Step, Stepper, StepButton } from 'material-ui/Stepper';
 // import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { black, white, indigo500, indigo300 } from 'material-ui/styles/colors';
-import Paper from 'material-ui/Paper'
+import { black, indigo300 } from 'material-ui/styles/colors';
 
 import { connect } from 'react-redux'
 import * as actionIndex from '../actions/actionIndex'
@@ -69,9 +68,6 @@ class AddEmployeeModal extends Component {
 
     render() {
         const { stepIndex } = this.state;
-        const fitWidthStyle = {
-            width: '100%',
-        };
         const actions = [
             <FlatButton
                 label="Cancel"

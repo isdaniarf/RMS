@@ -10,11 +10,6 @@ import { connect } from 'react-redux'
 import * as actionIndex from '../actions/actionIndex'
 import { bindActionCreators } from 'redux'
 
-const hoverStyle = {
-    color: indigo100,
-    backgroundColor: indigo100
-}
-
 class GradeHistory extends Component {
     render() {
         const gradeHistory = this.props.gradeHistory || [];
