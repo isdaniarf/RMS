@@ -1,0 +1,15 @@
+dist: trusty
+sudo: required
+language: node_js
+node_js:
+- 6
+install:
+- yarn build
+deploy:
+  provider: heroku
+  api_key: g6z5a1kpPr86J/YsNrzpCxdK32+Q0Tun7dD0DC4bhlHPlzmhBrqLxUGnaOKe3FYKx1iw2nmK1LdBlqKJE4zi77zgG9wx01Ji1XgnbTOfeB54Bxckk9WVg2Jah1ZQ/3dQjCDuJuj2nX5aPD5YBAkVWgf/mrqKBPRUX8GhuR719T5mm5GlB4ypqcjHc6j8+KFupw9gSoa0J6GtgzxayD1HnOl5ReuwsBiDVfJuTxDcPxeeDaIoLZWAFB9v4//fRc635x+cs7vNDM6VmMw3k2+bHNuPnkKjcuKqHD8dE38wTgRSy5eA/4ykamoEdD0lC6BJRfU/vh8rIFjuGq5NASu96y4JIDwXbo6HAUiVWbvXJNcD6feeNcSxK8oBaOO8/TwjFVFj5UAwS+PdWO119P50Ko/tQi8eEjHkan88NzskJalbb9oQ90gQCEnQmxMv1kAWNGGAALG07Yp+iv0WLTR4JyEWfarHvw/+XZI2V32BoM3yHuXBKtNR9TILPNxNC4gqVAJNeGxyDCAqHHRqvRxG/lPZBC/vWYGhtajYljLusRXHqEEazsfis7uaWUhSZyJkjqKv1Qy2vql59U42tRpX6wspLqMi7qRyztXB+HTcMhE9a7NjEarKC6VU6ricKX4XMPPN5/W8U3wdS4xFtJBpdkhFv+oY6fcIJw/SPiHoPiw=
+  app:
+    refactor-create-react-app: rmsreact
+notifications:
+  email:
+  - fithrantyo@gmail.com
