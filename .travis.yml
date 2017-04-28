@@ -3,15 +3,14 @@ sudo: required
 language: node_js
 node_js:
 - 6
-install:
-- yarn install
+script:
 - yarn build
 deploy:
   provider: heroku
   api_key:
     secure: mIoXrjSwnPr9tRpAJMt+Nmq7UE4/sn2GRaFoaEGbjuDf3+MBSsS6I2r8MDHxQL8BLz8DSm1+TP8lRDg84IcWGynvsyEezsuuBwMr+BCUZt6+HvnquWYvfBT30uNGVqpOAVe1eMJN64Ay0JLRVx2jKjQnDdkLVu6klbh2B3YcTZnujYTs/LnXDeMpmpTZ13YG0ff1fsKjy1eYn8HdpOALr5/98uyfgaNNJn+pYFubORj5sV2E+nUFCD8mllxwSbCfylfPPMSmioSdexzfwHWNjGdzc+Qd7klNqfzD6QsJJqUxmUF9JB2ryuBBHcPXAqQDdO0NOgowxtO72eA3fMt0lXteTs1EpvcrXCNet79kqV9MpfwLCXjtQsd9l0NubUMUfbXmgxxApEXRmkqRM3bfyWsH0Sfh5h2wOiy+fmqoB4eukTb/CUz7madBVH9tnNN3gnVsmyufd47n0zp6UWFxNTYP247AMLxRV0/f5/KuOkjtfwOl+wmFRc2MKQO575mQ1IkkZEi6p+0e6k3VImPDyhRsAx9hmNejbxn/96QtkYGdli3ULvZxElkylofzXMwQyBvwcXA1am/E9MfZx+DM2kXA2KEh8KXU2N8ywnEXamkzbJBjhsrR4YT23TfS/goKvJnviRK849kmeyq8dxaXzXdO8PGOLuAJjYpDqAfeSLo=
   app:
-    refactor-create-react-app: rmsreact
+    refactor-create-react-app: rmsapp-dani
 notifications:
   email:
   - fithrantyo@gmail.com
