@@ -31,7 +31,7 @@ describe('employee reducers', () => {
     it('should handle SEARCH_EMPLOYEE', () => {
         expect(
             reducer(undefined, {
-                type: types.SEARCH_EMPLOYEES,
+                type: types.searchEmployees.success,
                 filteredEmployees: filtered
             })
         ).toEqual({
