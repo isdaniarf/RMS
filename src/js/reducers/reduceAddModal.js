@@ -1,4 +1,4 @@
-import * as ActionIndex from '../actions/actionIndex'
+import * as types from '../actions/actionTypes'
 
 const defaultState = {
     isModalShown: false
@@ -6,7 +6,7 @@ const defaultState = {
 
 const reduceAddModal = (state = defaultState, action) => {
     switch (action.type) {
-        case ActionIndex.SHOW_ADD_MODAL:
+        case types.SHOW_ADD_MODAL:
             return Object.assign({}, {
                 isModalShown: action.isModalShown
             })

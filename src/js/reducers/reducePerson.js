@@ -1,4 +1,4 @@
-import * as ActionIndex from '../actions/actionIndex'
+import * as types from '../actions/actionTypes'
 
 const defaultState = {
         id: '',
@@ -22,14 +22,13 @@ const defaultState = {
 
 const reducePerson = (state = defaultState, action) => {
     switch (action.type) {
-        case ActionIndex.SHOW_PERSON_DETAIL:
-            // console.log(Object.assign({}, state, action.employee));
+        case types.SHOW_PERSON_DETAIL:
             return Object.assign({}, state, action.employee);
-        case ActionIndex.CHANGE_GRADE:
+        case types.CHANGE_GRADE:
             let newValue = Object.assign({}, state);
             newValue[action.fieldType] = action.value;
             return newValue;
-        case ActionIndex.UPDATE_EMPLOYEE_UI:
+        case types.UPDATE_EMPLOYEE_UI:
             return Object.assign({}, action.employee);
         default:
             return state

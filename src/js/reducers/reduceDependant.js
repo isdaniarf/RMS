@@ -1,15 +1,13 @@
-import * as ActionIndex from '../actions/actionIndex'
+import * as types from '../actions/actionTypes'
 
 const reduceDependant = (state = {}, action) => {
     switch (action.type) {
-        case ActionIndex.SHOW_PERSON_DETAIL:
-            return Object.assign({}, state, action.employee);
-        case ActionIndex.CHANGE_GRADE:
-            return Object.assign({}, state, {
-                grade: action.grade
-            });
-        case ActionIndex.UPDATE_EMPLOYEE_UI:
-            return Object.assign({}, action.employee);
+        case types.SHOW_PERSON_DETAIL:
+            return { ...state, ...action.employee };
+        case types.CHANGE_GRADE:
+            return { ...state, grade: action.grade };
+        case types.UPDATE_EMPLOYEE_UI:
+            return action.employee;
         default:
             return state
     }

@@ -18,7 +18,7 @@ describe('employee reducers', () => {
     it('should handle LOAD_EMPLOYEES', () => {
         expect(
             reducer(undefined, {
-                type: types.LOAD_EMPLOYEES,
+                type: types.loadEmployees.success,
                 employees: employee
             })
         ).toEqual({

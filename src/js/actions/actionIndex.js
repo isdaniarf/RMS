@@ -1,91 +1,80 @@
 import fetch from 'isomorphic-fetch'
-import { createAsyncAction } from '../util/util'
-
-export const SHOW_PERSON_DETAIL = 'SHOW_PERSON_DETAIL'
-export const loadEmployees = createAsyncAction('LOAD_EMPLOYEE')
-export const CHANGE_GRADE = 'CHANGE_GRADE'
-export const FILTER_EMPLOYEES = 'FILTER_EMPLOYEES'
-export const SET_SELECTED_EMPLOYEE = 'SET_SELECTED_EMPLOYEE'
-export const SEARCH_EMPLOYEES = 'SEARCH_EMPLOYEES'
-export const SEARCH_EMPLOYEES_FAIL = 'SEARCH_EMPLOYEES_FAIL'
-export const SAVE_EMPLOYEE = 'SAVE_EMPLOYEE'
-export const SAVE_EMPLOYEE_SUCCESS = 'SAVE_EMPLOYEE_SUCCESS'
-export const SAVE_EMPLOYEE_FAIL = 'SAVE_EMPLOYEE_FAIL'
-export const UPDATE_EMPLOYEE_UI = 'UPDATE_EMPLOYEE_UI'
-export const TOGGLE_SAVE_SNACKBAR = 'TOGGLE_SAVE_SNACKBAR'
-export const CHANGE_TAB = 'CHANGE_TAB'
-export const SHOW_ADD_MODAL = 'SHOW_ADD_MODAL'
+import * as types from './actionTypes'
 
 export const showEmployeeDetail = (employee) => ({
-  type: SHOW_PERSON_DETAIL,
+  type: types.SHOW_PERSON_DETAIL,
   employee
 })
 
 export const changeSelectField = (fieldType, value) => ({
-  type: CHANGE_GRADE,
+  type: types.CHANGE_GRADE,
   fieldType,
   value
 })
 
 export const loadContacts = () => ({
-  type: loadEmployees.start,
+  type: types.loadEmployees.start,
 })
 
 export const loadContactsSuccess = (employees) => ({
-  type: loadEmployees.success,
+  type: types.loadEmployees.success,
   employees
 });
 
 export const loadContactsFail = (ex) => ({
-  type: loadEmployees.fail, 
+  type: types.loadEmployees.fail, 
   ex
 });
 
 export const filterEmployees = (filterKey) => ({
-  type: FILTER_EMPLOYEES,
+  type: types.FILTER_EMPLOYEES,
   filterKey
 })
 
 export const setSelectedEmployee = (index) => ({
-  type: SET_SELECTED_EMPLOYEE,
+  type: types.SET_SELECTED_EMPLOYEE,
   index
 })
 
-export const searchEmployees = (filteredEmployees) => ({
-  type: SEARCH_EMPLOYEES,
+export const searchEmployeesStart = () => ({
+  type: types.searchEmployees.start
+})
+
+export const searchEmployeesSuccess = (filteredEmployees) => ({
+  type: types.searchEmployees.success,
   filteredEmployees
 })
 
 export const searchEmployeesFail = (ex) => ({
-  type: SEARCH_EMPLOYEES_FAIL
+  type: types.searchEmployees.fail
 })
 
 export const saveEmployee = (employee) => ({
-  type: SAVE_EMPLOYEE,
+  type: types.saveEmployees,
   employee
 })
 
 export const saveEmployeeFail = (ex) => ({
-  type: SAVE_EMPLOYEE_FAIL
+  type: types.saveEmployees.fail
 })
 
 export const updateEmployee = (employee) => ({
-  type: UPDATE_EMPLOYEE_UI,
+  type: types.UPDATE_EMPLOYEE_UI,
   employee
 })
 
 export const toggleSaveSnackbar = (isOpen) => ({
-  type: TOGGLE_SAVE_SNACKBAR,
+  type: types.TOGGLE_SAVE_SNACKBAR,
   isOpen
 })
 
 export const changeTab = (selectedTab) => ({
-  type: CHANGE_TAB,
+  type: types.CHANGE_TAB,
   selectedTab
 })
 
 export const showAddModal = (isModalShown) => ({
-  type: SHOW_ADD_MODAL,
+  type: types.SHOW_ADD_MODAL,
   isModalShown
 })
 
@@ -114,10 +103,10 @@ export const boundSetSelectedEmployee = (index) => (dispatch) => {
 }
 
 export const boundSearchEmployees = (searchKey) => (dispatch, getState) => {
-  // if(getIsFetching(getState))
+  dispatch(searchEmployeesStart());
   return fetch('http://localhost:8080/employee/search?name=' + searchKey)
     .then(x => x.json())
-    .then(emps => dispatch(searchEmployees(emps)))
+    .then(emps => dispatch(searchEmployeesSuccess(emps)))
     .catch(ex => dispatch(searchEmployeesFail(ex)))
 }
 
@@ -133,15 +122,15 @@ export const boundSaveEmployee = (employee) => (dispatch) => {
     cache: 'default'
   };
 
-  // console.log(JSON.stringify(employee));
   return fetch('http://localhost:8080/employee/add', requestParam)
     .then(x => x.text())
     .then(response => {
       dispatch(toggleSaveSnackbar(true));
+      dispatch(loadContacts());
       return fetch('http://localhost:8080/employee/all')
         .then(x => x.json())
         .then(emps => {
-          dispatch(loadContacts(emps));
+          dispatch(loadContactsSuccess(emps));
         });
     }).catch(ex => dispatch(saveEmployeeFail(ex)));
 }

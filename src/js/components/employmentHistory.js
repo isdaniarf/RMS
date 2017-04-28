@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
+import IconButton from 'material-ui/IconButton';
 import ActionDelete from 'material-ui/svg-icons/action/delete'
 import ImageEdit from 'material-ui/svg-icons/image/edit'
+import moment from 'moment'
+import { indigo100 } from 'material-ui/styles/colors';
+
+import { connect } from 'react-redux'
+import * as actionIndex from '../actions/actionIndex'
+import { bindActionCreators } from 'redux'
 
 const actionStyle = {
     padding: 30,
@@ -18,8 +25,9 @@ const detailStyle = {
     width: 300
 }
 
-export default class EmploymentHistory extends Component {
+class EmploymentHistory extends Component {
     render() {
+        const employmentHistory = this.props.employmentHistory || [];
         return (
             <Table
                 selectable={false}
@@ -28,77 +36,46 @@ export default class EmploymentHistory extends Component {
                 adjustForCheckbox={false}
             >
                 <TableBody displayRowCheckbox={false}>
-                    <TableRow>
-                        <TableRowColumn style={leftStyle}>
-                            FEBRUARY
-                            <h4>2016 - Present</h4>
-                            <h5>Mitrais</h5>
-                            <h6>Analyst Programmer</h6>
-                        </TableRowColumn>
-                        <TableRowColumn style={detailStyle}>
-                            Job Description:<br />
-                            <ul>
-                                <li>Optimize performance at customer projects</li>
-                                <li>Working & implementing web portal using Liferay & gatein portal Internet banking system</li>
-                                <li>Managing & deploying & releasing production</li>
-                                <li>Lead IMB ODC team (7 members)</li>
-                                <li>Tools & Technology: InteliJ IDE, Jenkins, Git, Maven, sorna</li>
-                                <li>Others</li>
-                            </ul>
-                        </TableRowColumn>
-                        <TableRowColumn style={actionStyle}>
-                            <ImageEdit />
-                            <ActionDelete />
-                        </TableRowColumn>
-                    </TableRow>
-                    <TableRow>
-                        <TableRowColumn style={leftStyle}>
-                            NOVEMBER - FEBRUARY
-                            <h4>2013 - 2016</h4>
-                            <h5>ABB</h5>
-                            <h6>Software Engineer</h6>
-                        </TableRowColumn>
-                        <TableRowColumn style={detailStyle}>
-                            Job Description:<br />
-                            <ul>
-                            <li>Optimize performance at customer projects</li>
-                            <li>Working & implementing web portal using Liferay & gatein portal Internet banking system</li>
-                            <li>Managing & deploying & releasing production</li>
-                            <li>Lead IMB ODC team (7 members)</li>
-                            <li>Tools & Technology: InteliJ IDE, Jenkins, Git, Maven, sorna</li>
-                            <li>Others</li>
-                            </ul>
-                        </TableRowColumn>
-                        <TableRowColumn style={actionStyle}>
-                            <ImageEdit />
-                            <ActionDelete />
-                        </TableRowColumn>
-                    </TableRow>
-                    <TableRow>
-                        <TableRowColumn style={leftStyle}>
-                            NOVEMBER - FEBRUARY
-                            <h4>2013 - 2016</h4>
-                            <h5>Stanford University</h5>
-                            <h6>Researcher</h6>
-                        </TableRowColumn>
-                        <TableRowColumn style={detailStyle}>
-                            Job Description:<br />
-                            <ul>
-                            <li>Algorithm study</li>
-                            <li>Working & implementing web portal using Liferay & gatein portal Internet banking system</li>
-                            <li>Managing & deploying & releasing production</li>
-                            <li>Lead IMB ODC team (7 members)</li>
-                            <li>Tools & Technology: InteliJ IDE, Jenkins, Git, Maven, sorna</li>
-                            <li>Others</li>
-                            </ul>
-                        </TableRowColumn>
-                        <TableRowColumn style={actionStyle}>
-                            <ImageEdit />
-                            <ActionDelete />
-                        </TableRowColumn>
-                    </TableRow>
+                    {employmentHistory.map(job => (
+                        <TableRow key={job.institution}>
+                            <TableRowColumn style={leftStyle}>
+                                {moment(job.startDate).format('MMMM').toUpperCase() + 
+                                    (moment(job.endDate).isValid() ? ' — ' + moment(job.endDate).format('MMMM').toUpperCase() : '')}
+                                <h4>{moment(job.startDate).format('YYYY').toUpperCase() + ' — ' +
+                                    (moment(job.endDate).isValid() ? moment(job.endDate).format('YYYY').toUpperCase() : 'Present')}</h4>
+                                <h5>{job.institution}</h5>
+                                <h6>{job.position}</h6>
+                            </TableRowColumn>
+                            <TableRowColumn style={detailStyle}>
+                                Job Description:<br />
+                                <ul>
+                                    {job.jobDescription.split('\n').map(desc => (
+                                        <li key={desc}>{desc}</li>
+                                    ))}
+                                </ul>
+                            </TableRowColumn>
+                            <TableRowColumn style={actionStyle}>
+                                <IconButton><ImageEdit hoverColor={indigo100} /></IconButton>
+                                <IconButton><ActionDelete hoverColor={indigo100} /></IconButton>
+                            </TableRowColumn>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
         );
     }
 }
+
+function mapStateToProps(state, ownProps) {
+    return {
+        employmentHistory: state.reducePerson.employmentHistory
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actionIndex, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmploymentHistory);

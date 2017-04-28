@@ -51,25 +51,19 @@ const styles = {
 };
 
 const container = {
-    // minWidth: 1000,
+    minWidth: 1000,
 }
 
 const leftSection = {
-    // width: '80%',
-    // height: 800,
-    // minWidth: 300,
     width: 800,
     float: 'left',
     overflow: 'hidden',
-    // position: 'relative',
     display: 'inline-block'
 };
 
 const rightSection = {
     margin: 30,
     width: '15%',
-    // height: '100%',
-    // float: 'right',
     overflow: 'hidden',
     position: 'relative',
     display: 'inline-block'

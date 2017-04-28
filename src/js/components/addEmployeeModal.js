@@ -20,8 +20,13 @@ import { bindActionCreators } from 'redux'
 const contentStyle = {
     width: '80%',
     maxWidth: 'none',
-    height: '80%',
     overflow: 'hidden'
+}
+
+const modalStyle = {
+    height: '500px',
+    minHeight: '400px',
+    maxHeight: 'none',
 }
 
 const addModalTheme = getMuiTheme({
@@ -58,7 +63,7 @@ class AddEmployeeModal extends Component {
             case 4:
                 return <LocationHistory />;
             default:
-                return <EmployeeDetail addMode={true} />;
+                return 'lol';
         }
     }
 
@@ -86,6 +91,7 @@ class AddEmployeeModal extends Component {
 
                 <Dialog
                     title=""
+                    bodyStyle={modalStyle}
                     contentStyle={contentStyle}
                     actions={actions}
                     modal={true}
@@ -94,33 +100,32 @@ class AddEmployeeModal extends Component {
                 >
                     <Stepper linear={false} activeStep={stepIndex}>
                         <Step>
-                            <StepButton onClick={() => this.setState({ stepIndex: 0 })}>
+                            <StepButton onTouchTap={() => this.setState({ stepIndex: 0 })}>
                                 Create New Employee
                             </StepButton>
                         </Step>
                         <Step>
-                            <StepButton onClick={() => this.setState({ stepIndex: 1 })}>
+                            <StepButton onTouchTap={() => this.setState({ stepIndex: 1 })}>
                                 Add Job History
                             </StepButton>
                         </Step>
                         <Step>
-                            <StepButton onClick={() => this.setState({ stepIndex: 2 })}>
+                            <StepButton onTouchTap={() => this.setState({ stepIndex: 2 })}>
                                 Add Grade History
                             </StepButton>
                         </Step>
                         <Step>
-                            <StepButton onClick={() => this.setState({ stepIndex: 3 })}>
+                            <StepButton onTouchTap={() => this.setState({ stepIndex: 3 })}>
                                 Add Dependants
                             </StepButton>
                         </Step>
                         <Step>
-                            <StepButton onClick={() => this.setState({ stepIndex: 4 })}>
+                            <StepButton onTouchTap={() => this.setState({ stepIndex: 4 })}>
                                 Add Location History
                             </StepButton>
                         </Step>
                     </Stepper>
                     {this.getStepContent(stepIndex)}
-                    
                 </Dialog>
 
             </MuiThemeProvider>

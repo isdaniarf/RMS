@@ -22,7 +22,8 @@ describe('fetches employees', () => {
       .reply(200, employee)
 
     const expectedActions = [
-      { type: types.LOAD_EMPLOYEES, employees: employee }
+      { type: types.loadEmployees.start },
+      { type: types.loadEmployees.success, employees: employee }      
     ]
 
     const store = mockStore({ employees: [] })
@@ -44,7 +45,8 @@ describe('fetches employees', () => {
 
     const expectedActions = [
       { type: types.TOGGLE_SAVE_SNACKBAR, isOpen: true },
-      { type: types.LOAD_EMPLOYEES, employees: employee }
+      { type: types.loadEmployees.start },
+      { type: types.loadEmployees.success, employees: employee }
     ]
 
     const store = mockStore({ isOpen: true, employees: [] })
